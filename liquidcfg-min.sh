@@ -1,3 +1,3 @@
 #!/bin/bash
-source ./liquidcfg.sh quiet 0
+source ~/code/linux-scripts/liquidcfg.sh quiet 0
 
