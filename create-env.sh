@@ -51,7 +51,10 @@ conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "
 conda activate $1
 
 # Common graphics and jupyter packages
-conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl "nodejs>12" jupyterlab jupyterlab_execute_time jupyterlab-git
+conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl "nodejs>12" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker
+
+# R
+conda install --override-channels -c conda-forge $2 -n $1 r-base r-irkernel r-XML r-xlsx r-httr r-stringr r-dplyr r-tm r-NLP
 
 # nvidia CUDA toolkit 11.7 (Geforce RTX3060LHR)
 conda install --override-channels -c nvidia -c conda-forge $2 -n $1 cudatoolkit=11.7
@@ -80,7 +83,8 @@ conda install --override-channels -c rapidsai -c nvidia -c conda-forge $2 -n $1 
 # conda install --override-channels -c intel -c conda-forge $2 -n $1 scikit-learn-intelex # dpctl
 # Avoid installing from intel because it raises the multiple openmp issue:
 # https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
-conda install --override-channels -c conda-forge $2 -n $1 scikit-learn-intelex # dpctl
+# Currently disable because training sparse data and some estimators become limited
+# conda install --override-channels -c conda-forge $2 -n $1 scikit-learn-intelex # dpctl
 
 # Intel Daal4py (deprecated, for benchmarks)
 # conda install --override-channels -c intel -c conda-forge $2 -n $1 daal4py
