@@ -1,3 +1,3 @@
 #!/bin/bash
-source ~/code/linux-scripts/liquidcfg.sh quiet 100
+source /home/mauricio/code/linux-scripts/liquidcfg.sh quiet 100 0000ff
 
