@@ -2,6 +2,7 @@
 echo '****************************'
 echo 'install NLTK data and models'
 echo '****************************'
+
 if [ -z "$1" ]
   then
     echo 'ERROR: Missing conda environment name'

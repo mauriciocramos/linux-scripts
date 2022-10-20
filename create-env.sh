@@ -6,6 +6,7 @@ echo 'Author: Mauricio Ramos (mauriciocramos at gmail.com)'
 echo 'Date created: 17/8/2020 Date changed: 2/9/2022'
 echo 'Usage: create-env.sh dev'
 echo '****************************************************'
+
 if [ -z "$1" ]
   then
     echo 'ERROR: Missing environment name'
