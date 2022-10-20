@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo '**********************************************************'
-echo 'install spacy data and models (requires Python setuptools)'
-echo '**********************************************************'
+echo '*****************************'
+echo 'install spacy data and models'
+echo '*****************************'
 if [ -z "$1" ]
   then
     echo 'ERROR: Missing conda environment name'
