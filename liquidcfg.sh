@@ -2,7 +2,7 @@
 if [ -z "$1" ]
   then
     echo 'Usage: liquidcfg [quiet|balanced|extreme] [percentage]'
-    echo 'Example: liquidcfg quiet 100'
+    echo 'Example: liquidcfg quiet 100 0000ff'
      exit 1
 fi
 liquidctl --match gigabyte initialize --verbose
