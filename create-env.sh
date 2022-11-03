@@ -55,7 +55,6 @@ conda activate $1
 conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl "nodejs>12" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker
 
 # nvidia CUDA toolkit 11.7 (Geforce RTX3060LHR, used by rapids, py-xgboost-gpu and spacy)
-# disabled while rapids is disabled
 conda install --override-channels -c nvidia -c conda-forge $2 -n $1 cudatoolkit=11.7
 
 # cupy drop-in (mostly) replacement for numpy/scipy
@@ -75,7 +74,7 @@ conda install --override-channels -c conda-forge $2 -n $1 py-xgboost-gpu
 
 # RAPIDS (end-to-end GPU pipelines) https://rapids.ai/start.html#get-rapids
 # (installs llvmlite)
-# disabled because requiring numpy 1.21.6 since 22.08 and conflicts to be solved
+# disabled because requiring numpy 1.21.6 since rapids 22.08 and conflicts to be solved
 # conda install --override-channels -c rapidsai -c nvidia -c conda-forge $2 -n $1 "rapids=22.10"
 
 # Intel extension for scikit-learn
