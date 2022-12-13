@@ -55,7 +55,7 @@ conda activate $1
 # conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl "nodejs>12" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker
 conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl nodejs jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker
 
-# nvidia CUDA toolkit 11.7 (Geforce RTX3060LHR, used by rapids, py-xgboost-gpu and spacy)
+# nvidia CUDA toolkit 11.7 (for Geforce RTX3060LHR, used by rapids, py-xgboost-gpu and spacy. rapids-22.10 requires cuda 11.7)
 conda install --override-channels -c nvidia -c conda-forge $2 -n $1 cudatoolkit=11.7
 
 # cupy drop-in (mostly) replacement for numpy/scipy
@@ -83,7 +83,7 @@ conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 
 # (installs intel-openmp, daal4py, dpctl for Intel GPU?)
 # Avoid installing from intel because it raises the multiple openmp issue:
 # https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
-# disabled because training sparse data and some estimators become limited
+# disabled because training sparse data and some estimators are limited
 # conda install --override-channels -c conda-forge $2 -n $1 scikit-learn-intelex # dpctl
 
 # Intel Daal4py (deprecated, for benchmarks)
