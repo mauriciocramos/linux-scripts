@@ -52,37 +52,29 @@ conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "
 conda activate $1
 
 # Common graphics and jupyter packages
-# conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl "nodejs>12" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker
 conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl nodejs jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker
 
-# nvidia CUDA toolkit 11.7 (for Geforce RTX3060LHR, used by rapids, py-xgboost-gpu and spacy. rapids-22.10 requires cuda 11.7)
-conda install --override-channels -c nvidia -c conda-forge $2 -n $1 cudatoolkit=11.8
-
-# cupy drop-in (mostly) replacement for numpy/scipy
-# Leave it be installed by rapids
+# nvidia CUDA toolkit (used by rapids, py-xgboost-gpu and spacy)
+# conda install --override-channels -c nvidia -c conda-forge $2 -n $1 "cudatoolkit=11.7"
 
 # numba waiting https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
 # Leave it be installed by rapids
 
 # scikit-learn (installs joblib and threadpoolctl)
-# conda install --override-channels -c conda-forge $2 -n $1 scikit-learn "joblib=1.1.1"
 conda install --override-channels -c conda-forge $2 -n $1 scikit-learn
 
-# xgboost GPU version (requires scikit-learn)
-# Leave it be installed by rapids
-# In case rapids will not be installed:
+# xgboost GPU version (requires scikit-learn) left to be installed by rapids but in case rapids won't be installed:
 # conda install --override-channels -c conda-forge $2 -n $1 py-xgboost-gpu
 
-# RAPIDS (end-to-end GPU pipelines) https://rapids.ai/start.html#get-rapids
-# (installs llvmlite)
-# disabled because requiring numpy 1.21.6 since rapids 22.08 and conflicts to be solved
+# RAPIDS (end-to-end GPU pipelines) https://rapids.ai/start.html#get-rapids # (installs llvmlite and requires cudatoolkit)
 # conda install --override-channels -c rapidsai -c nvidia -c conda-forge $2 -n $1 "rapids=22.10"
-conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.10"
+conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.10" "cudatoolkit=11.7"
 
-# Intel extension for scikit-learn
-# (installs intel-openmp, daal4py, dpctl for Intel GPU?)
-# Avoid installing from intel because it raises the multiple openmp issue:
-# https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+# Pytorch (requires cudatoolkit and required by spacy on GPU)
+conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
+
+
+# Intel extension for scikit-learn (installs intel-openmp, daal4py, dpctl for Intel GPU?)
 # disabled because training sparse data and some estimators are limited
 # conda install --override-channels -c conda-forge $2 -n $1 scikit-learn-intelex # dpctl
 
@@ -91,7 +83,7 @@ conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 
 
 # NLP packages
 # conda install -c conda-forge $2 -n $1 "nltk>=3.6.7" spacy spacy-transformers wordcloud
-conda install --override-channels -c conda-forge $2 -n $1 nltk spacy[117] spacy-transformers wordcloud gensim
+conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim
 # Mongodb
 conda install --override-channels -c conda-forge $2 -n $1 pymongo dnspython
 
