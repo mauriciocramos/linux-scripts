@@ -19,4 +19,4 @@ conda activate $1
 # python -m nltk.downloader -d /data/nltk_data all
 # python -c 'import nltk; nltk.download('all', download_dir='/data/nltk_data')'
 # python -m nltk.downloader -d /data/nltk_data punkt stopwords vader_lexicon averaged_perceptron_tagger maxent_ne_chunker words tagsets
-python -c 'import nltk; nltk.download(["punkt", "stopwords", "vader_lexicon", "averaged_perceptron_tagger", "maxent_ne_chunker", "words", "tagsets", "wordnet"], download_dir="/data/nltk_data")'
+python -c 'import nltk; nltk.download(["punkt", "stopwords", "vader_lexicon", "averaged_perceptron_tagger", "maxent_ne_chunker", "words", "tagsets", "wordnet", "omw-1.4"], download_dir="/data/nltk_data")'
