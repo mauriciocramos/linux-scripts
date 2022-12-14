@@ -18,6 +18,7 @@ conda activate $1
 
 # Spacy data and models
 pip install spacy-lookups-data
+
 # efficiency versions
 ## english
 python -m spacy download en_core_web_sm
