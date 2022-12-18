@@ -83,7 +83,7 @@ conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 p
 
 # NLP packages
 # conda install -c conda-forge $2 -n $1 "nltk>=3.6.7" spacy spacy-transformers wordcloud
-conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim
+conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect
 # Mongodb
 conda install --override-channels -c conda-forge $2 -n $1 pymongo dnspython
 
