@@ -23,8 +23,8 @@ rm $ENVDIR/r -rf
 ls $ENVDIR
 
 conda update -y conda
-conda create --no-default-packages --override-channels -c conda-forge -n r "python<3.10" "nodejs>12" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker r-base r-irkernel r-XML r-xlsx r-httr r-stringr r-dplyr r-tm r-NLP
-
-conda config --set auto_activate_base false
-conda info
+conda create --no-default-packages --override-channels -c conda-forge -n r "python=3.9" numpy scipy pandas libblas=*=*mkl \
+matplotlib seaborn openpyxl \
+jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker \
+r-base r-irkernel r-XML r-xlsx r-httr r-stringr r-dplyr r-tm r-NLP # base/conar requirements
 
