@@ -47,7 +47,7 @@ echo '**************************'
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#blas
 # (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
 # conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" "numpy=1.21.6" scipy libblas=*=*mkl #blas=*=mkl
-conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" numpy scipy libblas=*=*mkl #blas=*=mkl
+conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas libblas=*=*mkl #blas=*=mkl
 
 conda activate $1
 
@@ -86,6 +86,8 @@ conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 p
 conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect
 # Mongodb
 conda install --override-channels -c conda-forge $2 -n $1 pymongo dnspython
+# Scrapy
+conda install --override-channels -c conda-forge $2 -n $1 scrapy
 
 # post install
 conda config --set auto_activate_base false
