@@ -34,60 +34,73 @@ ls $ENVDIR
 conda update -y conda
 
 # Past packages still not installed:
-# plotly qgrid autopep8 pyaudio ffmpeg beautifulsoup4 html5lib psutil
-# geopy speechrecognition google-api-python-client google-cloud-speech numpy-financial pyperclip
+# plotly qgrid pyaudio ffmpeg html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
 
 echo '**************************'
 echo 'Creating environment '$1' '
 echo '**************************'
+
+OVERRIDE_CHANNELS="--override-channels"
 
 # Base python/mkl/numpy/scipy environment
 # rapids -> "python<3.10", rapids -> "numpy=1.23.5", numba -> "numpy<1.24.0"
 # blas=*=mkl mutex metapackage (mkl 9%-45% faster than openblas)
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#blas
 # (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
-# conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" "numpy=1.21.6" scipy libblas=*=*mkl #blas=*=mkl
-conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas libblas=*=*mkl #blas=*=mkl
+conda create --no-default-packages $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 "python=3.9" "numpy<1.24" scipy pandas openpyxl libblas=*=*mkl #blas=*=mkl
 
 conda activate $1
 
-# Common graphics and jupyter packages
-conda install --override-channels -c conda-forge $2 -n $1 matplotlib seaborn openpyxl nodejs jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker
-
-# nvidia CUDA toolkit (used by rapids, py-xgboost-gpu and spacy)
-# conda install --override-channels -c nvidia -c conda-forge $2 -n $1 "cudatoolkit=11.7"
-
-# numba waiting https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
-# Leave it be installed by rapids
+# Graphics and jupyter (jupyter_client=7.34 and jupyter_server<2 still required by rapids otherwise jupyter_server_terminals fail when starting jupyter lab)
+# conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 matplotlib seaborn jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 matplotlib seaborn "jupyter_server<2" "jupyter_client=7.3.4" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
 
 # scikit-learn (installs joblib and threadpoolctl)
-conda install --override-channels -c conda-forge $2 -n $1 scikit-learn
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 scikit-learn
 
-# xgboost GPU version (requires scikit-learn) left to be installed by rapids but in case rapids won't be installed:
-# conda install --override-channels -c conda-forge $2 -n $1 py-xgboost-gpu
+# CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
+conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.7"
 
-# RAPIDS (end-to-end GPU pipelines) https://rapids.ai/start.html#get-rapids # (installs llvmlite and requires cudatoolkit)
-# conda install --override-channels -c rapidsai -c nvidia -c conda-forge $2 -n $1 "rapids=22.10"
-conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.10" "cudatoolkit=11.7"
+# xgboost GPU version (requires scikit-learn) left to be installed by rapids
+# conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 py-xgboost-gpu
 
-# Pytorch (requires cudatoolkit and required by spacy on GPU)
-conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
+# RAPIDS https://rapids.ai/start.html#get-rapids # (installs llvmlite, requires cudatoolkit)
+# conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12" "cudatoolkit=11.7" jupyterlab
+conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
 
+# Tensorflow (requires CUDA toolkit. after rapids to avoid conflicts)
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 tensorflow-gpu
 
-# Intel extension for scikit-learn (installs intel-openmp, daal4py, dpctl for Intel GPU?)
-# disabled because training sparse data and some estimators are limited
-# conda install --override-channels -c conda-forge $2 -n $1 scikit-learn-intelex # dpctl
+# ffmpeg (before pytorch otherwise torchaudio would install old ffmpeg conflicting with pydub)
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 ffmpeg
+
+# Pytorch (requires cudatoolkit=11.7, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
+conda install $OVERRIDE_CHANNELS -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
+# conda install $OVERRIDE_CHANNELS -c pytorch-nightly -c nvidia $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
+
+# NLP and ASR packages
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
+
+# Mongodb
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 pymongo dnspython
+
+# Intel extension for scikit-learn (installs intel-openmp, daal4py) disabled because training sparse data and some estimators are limited
+# conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 scikit-learn-intelex # dpctl
 
 # Intel Daal4py (deprecated, for benchmarks)
-# conda install --override-channels -c intel -c conda-forge $2 -n $1 daal4py
+# conda install $OVERRIDE_CHANNELS -c intel -c conda-forge $2 -n $1 daal4py
 
-# NLP packages
-# conda install -c conda-forge $2 -n $1 "nltk>=3.6.7" spacy spacy-transformers wordcloud
-conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect
-# Mongodb
-conda install --override-channels -c conda-forge $2 -n $1 pymongo dnspython
-# Scrapy
-conda install --override-channels -c conda-forge $2 -n $1 scrapy
+# PIP section
+# vosk
+pip install --upgrade pip
+pip install vosk
+pip install textatistic
+# pip install tensorflow-gpu
+# ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+# cudf 22.12.1 requires cupy-cuda11x, which is not installed.
+# cudf-kafka 22.12.1 requires cython, which is not installed.
+# cudf 22.12.1 requires protobuf<3.21.0a0,>=3.20.1, but you have protobuf 3.19.6 which is incompatible.
+
 
 # post install
 conda config --set auto_activate_base false
