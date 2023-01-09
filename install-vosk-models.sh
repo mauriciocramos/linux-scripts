@@ -1,10 +1,11 @@
 #!/bin/bash
 
-echo '*******************'
+echo '********************'
 echo 'download vosk models'
-echo '*******************'
+echo '********************'
 echo
-echo 'WARNING: It donwloads vosk models but not needed after environment reinstallation.'
+echo 'WARNING: It donwloads vosk models from https://alphacephei.com/vosk/models. You do not need to do it after every vosk environment install.'
+echo ''
 echo
 read -rsp $'Press enter to continue...\n'
 
