@@ -51,22 +51,32 @@ conda create --no-default-packages $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 "p
 
 conda activate $1
 
-# Graphics and jupyter (jupyter_client=7.34 and jupyter_server<2 still required by rapids otherwise jupyter_server_terminals fail when starting jupyter lab)
+# Graphics and jupyter
+# jupyter_client=7.34 and jupyter_server<2 still required by rapids=22.12 otherwise jupyter_server_terminals fail when starting jupyter lab
+# matplotlib<3.6 because rapids install old networkx that has a bug with matplotlib>=3.6
 # conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 matplotlib seaborn jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
-conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 matplotlib seaborn "jupyter_server<2" "jupyter_client=7.3.4" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
+# conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 "matplotlib<3.6" seaborn "jupyter_server<2" "jupyter_client=7.3.4" jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 matplotlib seaborn jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
 
 # scikit-learn (installs joblib and threadpoolctl)
 conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 scikit-learn
 
-# CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
+# CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu and spacy. Pytorch requires cuda>=11.6<=11.7)
 conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.7"
+
+# numba waiting https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
+# Left to be installed by rapids
 
 # xgboost GPU version (requires scikit-learn) left to be installed by rapids
 # conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 py-xgboost-gpu
 
 # RAPIDS https://rapids.ai/start.html#get-rapids # (installs llvmlite, requires cudatoolkit)
-# conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12" "cudatoolkit=11.7" jupyterlab
-conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
+# conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
+# temporarly install nightly build until 23.02 is stable because of very old packages within 22.12 (e.g. networkx)
+conda install $OVERRIDE_CHANNELS -c rapidsai-nightly -c conda-forge -c nvidia $2 -n $1 "rapids=23.02"
+
+# nxviz (having old networkx installed by rapids)
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 nxviz
 
 # Tensorflow (requires CUDA toolkit. after rapids to avoid conflicts)
 conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 tensorflow-gpu
@@ -76,7 +86,7 @@ conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 ffmpeg
 
 # Pytorch (requires cudatoolkit=11.7, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
 conda install $OVERRIDE_CHANNELS -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
-# conda install $OVERRIDE_CHANNELS -c pytorch-nightly -c nvidia $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
+
 
 # NLP and ASR packages
 conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
