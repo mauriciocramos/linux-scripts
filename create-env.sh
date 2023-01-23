@@ -20,7 +20,6 @@ START_TIME=$(date +%s)
 
 # required to use conda within a script
 source /home/mauricio/miniconda3/etc/profile.d/conda.sh
-
 # remove previous environment
 conda deactivate
 conda info
@@ -40,14 +39,13 @@ echo '**************************'
 OVERRIDE_CHANNELS="--override-channels"
 
 # Base environment
-# rapids -> "python<3.10", rapids -> "numpy=1.23.5", numba -> "numpy<1.24.0"
+# rapids -> "python<3.10","numpy="1.23.5","jupyter_server=1.23.5"
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#blas
-# libblas=*=*mkl or blas=*=mkl (mkl 9%-45% faster than openblas)
-# (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
+# libblas=*=*mkl or blas=*=mkl (mkl 9%-45% faster than openblas) (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
 # ffmpeg before pytorch otherwise torchaudio would install old ffmpeg conflicting with pydub)
 conda create --no-default-packages $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas \
 openpyxl dnspython pymongo ffmpeg nxviz \
-matplotlib seaborn nodejs jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black \
+matplotlib seaborn \
 scikit-learn
 
 conda activate $1
@@ -64,6 +62,9 @@ conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=
 
 # RAPIDS https://rapids.ai/start.html#get-rapids # (installs llvmlite, numba, requires cudatoolkit)
 conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
+
+# Jupyterlab after RAPIDS->jupyter_server=1.23.5 while lastest 2.x
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
 
 # Tensorflow (requires CUDA toolkit)
 # conda tensorflow is not built/linked to tensorrt
