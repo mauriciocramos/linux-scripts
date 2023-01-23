@@ -63,7 +63,7 @@ conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=
 # conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 py-xgboost-gpu
 
 # RAPIDS https://rapids.ai/start.html#get-rapids # (installs llvmlite, numba, requires cudatoolkit)
-# conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
+conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
 
 # Tensorflow (requires CUDA toolkit)
 # conda tensorflow is not built/linked to tensorrt
@@ -73,7 +73,7 @@ conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 tensorflow
 conda install $OVERRIDE_CHANNELS -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
 
 # NLP and ASR packages
-# conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
 
 # Pip section
 # pip install --upgrade pip
