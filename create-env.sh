@@ -46,15 +46,15 @@ OVERRIDE_CHANNELS="--override-channels"
 # (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
 # ffmpeg before pytorch otherwise torchaudio would install old ffmpeg conflicting with pydub)
 conda create --no-default-packages $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas \
-# openpyxl dnspython pymongo ffmpeg nxviz \
-# matplotlib seaborn nodejs jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black \
-# scikit-learn
+openpyxl dnspython pymongo ffmpeg nxviz \
+matplotlib seaborn nodejs jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black \
+scikit-learn
 
 conda activate $1
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu and spacy. Pytorch requires cuda>=11.6<=11.7)
 # conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.2" "cudnn=8.1.0" # tensorflow?
-# conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.7"
+conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.7"
 
 # numba waiting https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
 # Left to be installed by rapids
@@ -67,10 +67,10 @@ conda activate $1
 
 # Tensorflow (requires CUDA toolkit)
 # conda tensorflow is not built/linked to tensorrt
-# conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 "tensorflow<2.10"
+conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 tensorflow
 
 # Pytorch (requires cudatoolkit=11.7, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
-# conda install $OVERRIDE_CHANNELS -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
+conda install $OVERRIDE_CHANNELS -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
 
 # NLP and ASR packages
 # conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
