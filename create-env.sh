@@ -37,9 +37,13 @@ conda update -y -n base conda
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#blas
 # libblas=*=*mkl or blas=*=mkl (mkl 9%-45% faster than openblas) (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
 # ffmpeg before pytorch otherwise torchaudio would install old ffmpeg conflicting with pydub)
+# rapids-22.12->networkx-2.6.3->matplotlib-3.6 has a bug. workaround: matplotlib<3.6 until rapids is fixed.
 conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas \
-openpyxl dnspython pymongo ffmpeg nxviz \
-matplotlib seaborn \
+openpyxl \
+dnspython pymongo \
+ffmpeg \
+networkx nxviz \
+"matplotlib<3.6" seaborn \
 scikit-learn
 
 conda activate $1
@@ -69,7 +73,6 @@ conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 p
 
 # NLP and ASR packages
 conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
-
 # Pip section
 pip install --upgrade pip
 pip install vosk
