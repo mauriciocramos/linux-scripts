@@ -45,15 +45,21 @@ print(f'{tf.test.is_built_with_rocm()=}')
 print(f'{tf.test.is_built_with_xla()=}')
 
 print('-'*80)
-from tensorflow.python.compiler.tensorrt import trt_convert as trt
-print(f'{trt.trt_utils._pywrap_py_utils.is_tensorrt_enabled()=}')  # when false, tensorrt still runs?
-print(f'{trt.trt_utils._pywrap_py_utils.get_linked_tensorrt_version()=}')
-print(f'{trt.trt_utils._pywrap_py_utils.get_loaded_tensorrt_version()=}')
+try:
+    from tensorflow.python.compiler.tensorrt import trt_convert as trt
+    print(f'{trt.trt_utils._pywrap_py_utils.is_tensorrt_enabled()=}')  # when false, tensorrt still runs?
+    print(f'{trt.trt_utils._pywrap_py_utils.get_linked_tensorrt_version()=}')
+    print(f'{trt.trt_utils._pywrap_py_utils.get_loaded_tensorrt_version()=}')
+except Exception as e:
+    print(f'Exception: {e}')
 
 print('-'*80)
-import tensorrt
-print(f'{tensorrt.__version__=}')
-print(f'{tensorrt.Builder(tensorrt.Logger())=}')  # tensorrt still runs when is_tensorrt_enable() is false
+try:
+    import tensorrt
+    print(f'{tensorrt.__version__=}')
+    print(f'{tensorrt.Builder(tensorrt.Logger())=}')  # tensorrt still runs when is_tensorrt_enable() is false
+except Exception as e:
+    print(f'Exception: {e}')
 
 # print('-'*80)
 # print('tf.test.main(argv=None):')
