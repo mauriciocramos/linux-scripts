@@ -28,22 +28,16 @@ ENVDIR=/home/mauricio/miniconda3/envs/
 rm $ENVDIR$1 -rf
 ls $ENVDIR
 
-conda update -y conda
+conda update -y -n base conda
 
 # Past packages still not installed: plotly qgrid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
-
-echo '**************************'
-echo 'Creating environment '$1' '
-echo '**************************'
-
-OVERRIDE_CHANNELS="--override-channels"
 
 # Base environment
 # rapids -> "python<3.10","numpy="1.23.5","jupyter_server=1.23.5"
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#blas
 # libblas=*=*mkl or blas=*=mkl (mkl 9%-45% faster than openblas) (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
 # ffmpeg before pytorch otherwise torchaudio would install old ffmpeg conflicting with pydub)
-conda create --no-default-packages $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas \
+conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas \
 openpyxl dnspython pymongo ffmpeg nxviz \
 matplotlib seaborn \
 scikit-learn
@@ -51,35 +45,35 @@ scikit-learn
 conda activate $1
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu and spacy. Pytorch requires cuda>=11.6<=11.7)
-# conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.2" "cudnn=8.1.0" # tensorflow?
-conda install $OVERRIDE_CHANNELS -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.7"
+# conda install --override-channels -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.2" "cudnn=8.1.0" # tensorflow?
+conda install --override-channels -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.7"
 
 # numba waiting https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
 # Left to be installed by rapids
 
 # xgboost GPU version (requires scikit-learn) left to be installed by rapids
-# conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 py-xgboost-gpu
+# conda install --override-channels -c conda-forge $2 -n $1 py-xgboost-gpu
 
 # RAPIDS https://rapids.ai/start.html#get-rapids # (installs llvmlite, numba, requires cudatoolkit)
-conda install $OVERRIDE_CHANNELS -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
+conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
 
 # Jupyterlab after RAPIDS->jupyter_server=1.23.5 while lastest 2.x
-conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
+conda install --override-channels -c conda-forge $2 -n $1 jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
 
 # Tensorflow (requires CUDA toolkit)
 # conda tensorflow is not built/linked to tensorrt
-conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 tensorflow
+conda install --override-channels -c conda-forge $2 -n $1 tensorflow
 
 # Pytorch (requires cudatoolkit=11.7, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
-conda install $OVERRIDE_CHANNELS -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
+conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
 
 # NLP and ASR packages
-conda install $OVERRIDE_CHANNELS -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
+conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
 
 # Pip section
-# pip install --upgrade pip
-# pip install vosk
-# pip install textatistic
+pip install --upgrade pip
+pip install vosk
+pip install textatistic
 
 # post install
 conda config --set auto_activate_base false

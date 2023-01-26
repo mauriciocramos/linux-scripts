@@ -8,7 +8,7 @@ ENVDIR=~/miniconda3/envs/
 rm "$ENVDIR"tf -rf
 ls "$ENVDIR"
 
-conda update -y conda
+conda update -y -n base conda
 
 # Instructions to install tensorflow: https://www.tensorflow.org/install/pip
 conda create --no-default-packages --override-channels -c conda-forge -y -n tf python=3.9

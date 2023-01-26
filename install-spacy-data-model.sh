@@ -13,7 +13,8 @@ read -rsp $'Press enter to continue...\n'
 
 # export cond env downstream
 source /home/mauricio/miniconda3/etc/profile.d/conda.sh
-conda update --yes conda
+conda deactivate
+conda update -y -n base conda
 conda activate $1
 
 # Spacy data and models from https://spacy.io/models/en
