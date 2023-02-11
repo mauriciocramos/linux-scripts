@@ -33,16 +33,17 @@ conda update -y -n base conda
 # Past packages still not installed: plotly qgrid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
 
 # Base environment
-# rapids -> "python<3.10","numpy="1.23.5","jupyter_server=1.23.5"
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#blas
 # libblas=*=*mkl or blas=*=mkl (mkl 9%-45% faster than openblas) (conda-forge blas=*=mkl installs llvm-openmp and _openmp_mutex-4.5-2_kmp_llvm)
 # ffmpeg before pytorch otherwise torchaudio would install old ffmpeg conflicting with pydub)
-# rapids-22.12->networkx-2.6.3->matplotlib-3.6 has a bug. workaround: matplotlib<3.6 until rapids is fixed.
-conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9" numpy scipy pandas \
+# rapids-22.12 -> "python<3.10","numpy="1.23.5","jupyter_server=1.23.5"
+# rapids-22.12 -> (networkx-2.6.3 -> matplotlib-3.6 has a bug). workaround: matplotlib<3.6 until rapids (23.02?) is fixed.
+conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python=3.9.15" "numpy=1.23.5" scipy pandas \
 openpyxl \
 dnspython pymongo \
 ffmpeg \
 networkx nxviz \
+pydot graphviz \
 "matplotlib<3.6" seaborn \
 scikit-learn
 
@@ -52,19 +53,13 @@ conda activate $1
 # conda install --override-channels -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.2" "cudnn=8.1.0" # tensorflow?
 conda install --override-channels -c conda-forge -c nvidia $2 -n $1 "cudatoolkit=11.7"
 
-# numba waiting https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
-# Left to be installed by rapids
-
-# xgboost GPU version (requires scikit-learn) left to be installed by rapids
-# conda install --override-channels -c conda-forge $2 -n $1 py-xgboost-gpu
-
-# RAPIDS https://rapids.ai/start.html#get-rapids # (installs llvmlite, numba, requires cudatoolkit)
+# RAPIDS https://rapids.ai/start.html#get-rapids
 conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=22.12"
 
-# Jupyterlab after RAPIDS->jupyter_server=1.23.5 while lastest 2.x
+# Jupyterlab after RAPIDS->jupyter_server=1.23.5 while lastest 2.x otherwise jupyter_server conflict
 conda install --override-channels -c conda-forge $2 -n $1 jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
 
-# Tensorflow (requires CUDA toolkit)
+# Tensorflow
 # conda tensorflow is not built/linked to tensorrt
 conda install --override-channels -c conda-forge $2 -n $1 tensorflow
 
@@ -77,6 +72,10 @@ conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-trans
 pip install --upgrade pip
 pip install vosk
 pip install textatistic
+# https://www.adriangb.com/scikeras/stable/install.html#users-installation
+pip install --no-deps scikeras[tensorflow]
+# TODO: replace scikeras by https://keras.io/keras_tuner/
+# pip install keras-tuner
 
 # post install
 conda config --set auto_activate_base false
