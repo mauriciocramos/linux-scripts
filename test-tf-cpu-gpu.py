@@ -1,6 +1,7 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 os.environ['CUDA_MODULE_LOADING'] = 'LAZY'
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '1'
 import tensorflow as tf
 import timeit
 
@@ -31,8 +32,8 @@ def gpu():
         return tf.math.reduce_sum(net_gpu)
 
 # We run each op once to warm up; see: https://stackoverflow.com/a/45067900
-cpu()
-gpu()
+print(f'CPU warm up: {cpu()}')
+print(f'GPU warm up: {gpu()}')
 
 # Run the op several times.
 print('Time (s) to convolve 32x7x7x3 filter over random 100x100x100x3 images '
