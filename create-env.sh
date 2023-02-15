@@ -67,7 +67,7 @@ conda install --override-channels -c conda-forge $2 -n $1 tensorflow
 conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.7"
 
 # NLP and ASR packages
-conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat
+conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat selenium
 # Pip section
 pip install --upgrade pip
 pip install vosk
