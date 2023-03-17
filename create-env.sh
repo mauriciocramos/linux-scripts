@@ -19,12 +19,12 @@ read -rsp $'Press enter to continue...\n'
 START_TIME=$(date +%s)
 
 # required to use conda within a script
-source /home/mauricio/miniconda3/etc/profile.d/conda.sh
+source $HOME/miniconda3/etc/profile.d/conda.sh
 # remove previous environment
 conda deactivate
 conda info
 conda env remove --name $1
-ENVDIR=/home/mauricio/miniconda3/envs/
+ENVDIR=$HOME/miniconda3/envs/
 rm $ENVDIR$1 -rf
 ls $ENVDIR
 
@@ -82,5 +82,5 @@ conda config --set auto_activate_base false
 conda info
 
 END_TIME=$(date +%s)
-echo "Elased time: $(($END_TIME - $START_TIME)) seconds"
+echo "Elapsed time: $(($END_TIME - $START_TIME)) seconds"
 
