@@ -45,7 +45,8 @@ ffmpeg \
 networkx nxviz \
 pydot graphviz \
 matplotlib seaborn \
-scikit-learn
+scikit-learn \
+#pyspark
 
 conda activate $1
 
