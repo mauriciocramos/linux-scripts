@@ -46,7 +46,7 @@ networkx nxviz \
 pydot graphviz \
 matplotlib seaborn \
 scikit-learn \
-#pyspark
+pyspark
 
 conda activate $1
 
