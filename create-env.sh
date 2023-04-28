@@ -50,7 +50,7 @@ pyspark
 
 conda activate $1
 
-# Jupyterlab after RAPIDS->jupyter_server=1.23.5 while lastest 2.x otherwise jupyter_server conflict
+# Jupyterlab
 conda install --override-channels -c conda-forge $2 -n $1 jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu and spacy. Pytorch requires cuda>=11.6<=11.7)
@@ -58,13 +58,13 @@ conda install --override-channels -c conda-forge $2 -n $1 jupyterlab jupyterlab_
 conda install --override-channels -c conda-forge -c nvidia $2 -n $1 cudatoolkit
 
 # RAPIDS https://rapids.ai/start.html#get-rapids
-conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.02"
+conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.04"
 
 # Tensorflow
 # conda tensorflow is not built/linked to tensorrt
 conda install --override-channels -c conda-forge $2 -n $1 tensorflow
 
-# Pytorch (requires cudatoolkit=11.7, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
+# Pytorch (requires cudatoolkit=11.8, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
 conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.8"
 
 # NLP and ASR packages
