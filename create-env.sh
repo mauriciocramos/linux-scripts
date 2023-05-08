@@ -47,7 +47,7 @@ pydot graphviz \
 matplotlib seaborn \
 scikit-learn \
 pyspark \
-jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black
+jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black nodejs
 
 conda activate $1
 
