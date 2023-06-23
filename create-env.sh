@@ -47,7 +47,8 @@ pydot graphviz \
 matplotlib seaborn \
 scikit-learn \
 pyspark \
-jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black nodejs
+jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black nodejs \
+python-confluent-kafka
 
 conda activate $1
 
@@ -73,6 +74,7 @@ pip install textatistic
 pip install --no-deps scikeras[tensorflow]
 # TODO: replace scikeras by https://keras.io/keras_tuner/
 # pip install keras-tuner
+pip install kafka-python
 
 # post install
 conda config --set auto_activate_base false
