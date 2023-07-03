@@ -48,7 +48,8 @@ matplotlib seaborn \
 scikit-learn \
 pyspark \
 jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black nodejs \
-python-confluent-kafka
+python-confluent-kafka \
+tweepy
 
 conda activate $1
 
