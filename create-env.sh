@@ -13,7 +13,7 @@ if [ -z "$1" ]
     exit 1
 fi
 echo
-echo 'WARNING: Previoulsly created environment '$1' will be removed'
+echo 'WARNING: Previously created environment '$1' will be removed'
 echo
 read -rsp $'Press enter to continue...\n'
 START_TIME=$(date +%s)
@@ -57,7 +57,7 @@ conda activate $1
 conda install --override-channels -c conda-forge -c nvidia $2 -n $1 cudatoolkit
 
 # RAPIDS https://rapids.ai/start.html#get-rapids
-conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.04"
+conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
 
 # Tensorflow conda package is not built with tensorrt
 conda install --override-channels -c conda-forge $2 -n $1 tensorflow
