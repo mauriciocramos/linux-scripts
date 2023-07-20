@@ -33,11 +33,6 @@ conda update -y -n base conda
 # Past packages still not installed: plotly qgrid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
 
 # Base environment
-# https://conda-forge.org/docs/maintainer/knowledge_base.html#blas
-# ffmpeg before pytorch otherwise torchaudio would install old ffmpeg conflicting with pydub)
-# rapids-23.04 ->
-# rapids-23.02 -> "python<3.11","numpy="1.23.5","jupyter_server=1.23.5"
-# rapids-22.12 -> (networkx-2.6.3 -> matplotlib-3.6 has a bug). workaround: matplotlib<3.6 until rapids (23.02?) is fixed.
 conda create --no-default-packages --override-channels -c conda-forge $2 -n $1 "python<3.11" numpy scipy pandas \
 openpyxl \
 dnspython pymongo \
@@ -57,7 +52,7 @@ conda activate $1
 conda install --override-channels -c conda-forge -c nvidia $2 -n $1 cudatoolkit
 
 # RAPIDS https://rapids.ai/start.html#get-rapids
-conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
+# conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
 
 # Tensorflow conda package is not built with tensorrt
 conda install --override-channels -c conda-forge $2 -n $1 tensorflow
