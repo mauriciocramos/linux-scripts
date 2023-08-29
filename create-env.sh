@@ -43,6 +43,7 @@ matplotlib seaborn \
 scikit-learn \
 pyspark \
 jupyterlab jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black nodejs \
+selenium scrapy \
 python-confluent-kafka \
 tweepy
 
@@ -51,8 +52,8 @@ conda activate $1
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
 conda install --override-channels -c conda-forge -c nvidia $2 -n $1 cudatoolkit
 
-# RAPIDS https://rapids.ai/start.html#get-rapids
-# conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
+# RAPIDS https://rapids.ai/#quick-start
+#conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
 
 # Tensorflow conda package is not built with tensorrt
 conda install --override-channels -c conda-forge $2 -n $1 tensorflow
@@ -61,7 +62,7 @@ conda install --override-channels -c conda-forge $2 -n $1 tensorflow
 conda install --override-channels -c pytorch -c nvidia -c conda-forge $2 -n $1 pytorch torchvision torchaudio "pytorch-cuda=11.8"
 
 # NLP and ASR packages
-conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect scrapy speechrecognition pydub textstat selenium
+conda install --override-channels -c conda-forge $2 -n $1 nltk spacy spacy-transformers wordcloud gensim textblob langdetect speechrecognition pydub textstat
 # Pip section
 pip install --upgrade pip
 pip install vosk
