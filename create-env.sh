@@ -35,6 +35,7 @@ conda update -y -n base conda
 # Base environment
 conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" "python<3.11" numpy scipy pandas \
 openpyxl \
+sqlalchemy "trino-python-client[sqlalchemy]" \
 dnspython pymongo \
 ffmpeg \
 networkx nxviz \
