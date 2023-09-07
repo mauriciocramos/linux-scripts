@@ -64,6 +64,10 @@ conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$
 
 # NLP and ASR packages
 conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud gensim textblob langdetect speechrecognition pydub textstat
+
+echo '*******************************************'
+echo 'Pip installations after conda installations'
+echo '*******************************************'
 # Pip section
 pip install --upgrade pip
 pip install vosk
