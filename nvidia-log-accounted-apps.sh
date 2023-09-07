@@ -12,4 +12,4 @@ mem_utilization,\
 max_memory_usage,\
 time \
 --format=csv -l 1 \
--f nvidia-accounted-apps.csv
+#-f nvidia-accounted-apps.csv

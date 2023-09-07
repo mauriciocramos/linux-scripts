@@ -9,4 +9,4 @@ pid,\
 process_name,\
 used_gpu_memory \
 --format=csv -l 1 \
--f nvidia-compute-apps.csv
+#-f nvidia-compute-apps.csv

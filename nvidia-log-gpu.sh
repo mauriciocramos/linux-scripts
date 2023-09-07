@@ -126,4 +126,4 @@ clocks.max.graphics,\
 clocks.max.sm,\
 clocks.max.memory \
 --format=csv -l 1 \
--f nvidia-gpu.csv
+#-f nvidia-gpu.csv

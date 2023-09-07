@@ -10,4 +10,4 @@ remapped_rows.uncorrectable,\
 remapped_rows.pending,\
 remapped_rows.failure \
 --format=csv -l 1 \
--f nvidia-gpu.csv
+#-f nvidia-gpu.csv
