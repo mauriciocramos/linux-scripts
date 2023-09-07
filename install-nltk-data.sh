@@ -11,7 +11,7 @@ fi
 read -rsp $'Press enter to continue...\n'
 
 # export cond env downstream
-source /home/mauricio/miniconda3/etc/profile.d/conda.sh
+source "$HOME"/miniconda3/etc/profile.d/conda.sh
 conda update -y -n base conda
 conda activate $1
 

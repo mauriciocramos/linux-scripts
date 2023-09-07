@@ -1,4 +1,4 @@
-source /home/mauricio/miniconda3/etc/profile.d/conda.sh
+source "$HOME"/miniconda3/etc/profile.d/conda.sh
 
 conda create -c conda-forge -y -n test scikit-learn-intelex
 conda list -n test > conda-forge.txt

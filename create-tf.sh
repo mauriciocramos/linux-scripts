@@ -1,5 +1,5 @@
 START_TIME=$(date +%s)
-source /home/mauricio/miniconda3/etc/profile.d/conda.sh
+source "$HOME"/miniconda3/etc/profile.d/conda.sh
 
 # remove previous environment
 conda deactivate

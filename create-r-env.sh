@@ -12,13 +12,13 @@ echo
 read -rsp $'Press enter to continue...\n'
 
 # export cond env downstream
-source /home/mauricio/miniconda3/etc/profile.d/conda.sh
+source "$HOME"/miniconda3/etc/profile.d/conda.sh
 
 # remove previous env
 conda deactivate
 conda info
 conda env remove --name r
-ENVDIR=/home/mauricio/miniconda3/envs
+ENVDIR="$HOME"/miniconda3/envs
 rm $ENVDIR/r -rf
 ls $ENVDIR
 
