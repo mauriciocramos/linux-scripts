@@ -73,9 +73,7 @@ pip install --upgrade pip
 pip install vosk
 pip install textatistic
 # https://www.adriangb.com/scikeras/stable/install.html#users-installation
-pip install --no-deps "scikeras[tensorflow]"
-# TODO: replace scikeras by https://keras.io/keras_tuner/
-# pip install keras-tuner
+pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
 pip install kafka-python
 
 # post install
