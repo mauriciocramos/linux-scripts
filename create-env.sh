@@ -33,13 +33,13 @@ conda update -y -n base conda
 # Past packages still not installed: plotly qgrid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
 
 # Base environment
-conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" "python<3.11" numpy scipy pandas \
+conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" "python<3.11" \
+numpy scipy pandas \
 openpyxl \
 sqlalchemy trino-python-client \
 dnspython pymongo \
 ffmpeg \
-networkx nxviz \
-pydot graphviz \
+networkx nxviz pydot graphviz \
 matplotlib seaborn \
 scikit-learn \
 pyspark \
@@ -68,7 +68,6 @@ conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-t
 echo '*******************************************'
 echo 'Pip installations after conda installations'
 echo '*******************************************'
-# Pip section
 pip install --upgrade pip
 pip install vosk
 pip install textatistic
