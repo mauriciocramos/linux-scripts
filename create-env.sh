@@ -35,7 +35,6 @@ conda update -y -n base conda
 # Base environment
 conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" "python<3.11" \
 jupyterlab nodejs jupyterlab_execute_time jupyterlab-git \
-jupyterlab-spellchecker \
 jupyterlab_code_formatter autopep8 isort black \
 numpy scipy pandas \
 openpyxl \
@@ -49,6 +48,7 @@ pyspark \
 selenium scrapy \
 python-confluent-kafka \
 tweepy
+# jupyterlab-spellchecker
 
 conda activate "$1"
 
