@@ -18,8 +18,7 @@ echo
 read -rsp $'Press enter to continue...\n'
 START_TIME=$(date +%s)
 
-# required to use conda within a script
-source "$HOME"/miniconda3/etc/profile.d/conda.sh
+source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within a script
 # remove previous environment
 conda deactivate
 conda info
@@ -50,7 +49,7 @@ python-confluent-kafka \
 tweepy
 # jupyterlab-spellchecker
 
-conda activate "$1"
+conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
 conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatoolkit
