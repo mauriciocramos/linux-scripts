@@ -33,7 +33,7 @@ conda update -y -n base conda
 
 # Base environment
 conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" "python<3.11" \
-"jupyterlab<4" nodejs jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black \
+"jupyterlab<3" nodejs "jupyterlab_execute_time<=2.3.1" "jupyterlab-git<0.42" jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black \
 numpy scipy pandas \
 matplotlib seaborn \
 openpyxl \
