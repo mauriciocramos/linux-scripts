@@ -35,44 +35,44 @@ conda update -y -n base conda
 conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" "python<3.11" \
 "jupyterlab<4" nodejs jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black \
 numpy scipy pandas \
-openpyxl \
-sqlalchemy trino-python-client \
-dnspython pymongo \
-ffmpeg \
-networkx nxviz pydot graphviz \
 matplotlib seaborn \
+openpyxl \
 scikit-learn \
-pyspark \
-selenium scrapy \
-python-confluent-kafka \
-tweepy
+sqlalchemy trino-python-client \
+#networkx nxviz pydot graphviz \
+#dnspython pymongo \
+#ffmpeg \
+#pyspark \
+#selenium scrapy \
+#python-confluent-kafka \
+#tweepy
 
 conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
-conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatoolkit
+#conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatoolkit
 
 # RAPIDS https://rapids.ai/#quick-start
 #conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
 
 # Tensorflow conda package is not built with tensorrt
-conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
+#conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
 
 # Pytorch (cudatoolkit=11.8, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
-conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
+#conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
 
 # NLP and ASR packages
-conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud gensim textblob langdetect speechrecognition pydub textstat
+#conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud gensim textblob langdetect speechrecognition pydub textstat
 
-echo '*******************************************'
-echo 'Pip installations after conda installations'
-echo '*******************************************'
-pip install --upgrade pip
-pip install vosk
-pip install textatistic
-# https://www.adriangb.com/scikeras/stable/install.html#users-installation
-pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
-pip install kafka-python
+#echo '*******************************************'
+#echo 'Pip installations after conda installations'
+#echo '*******************************************'
+#pip install --upgrade pip
+#pip install vosk
+#pip install textatistic
+## https://www.adriangb.com/scikeras/stable/install.html#users-installation
+#pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
+#pip install kafka-python
 
 # post install
 conda config --set auto_activate_base false
