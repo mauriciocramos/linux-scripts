@@ -17,9 +17,9 @@ wget -N https://alphacephei.com/vosk/models/vosk-model-en-us-0.42-gigaspeech.zip
 # portuguese mmodels
 wget -N https://alphacephei.com/vosk/models/vosk-model-small-pt-0.3.zip -P $VOSK_DIR
 wget -N https://alphacephei.com/vosk/models/vosk-model-pt-fb-v0.1.1-20220516_2113.zip -P $VOSK_DIR
-# multi-language speaker identification model
+# multi-language speaker identification model (never tested)
 wget -N https://alphacephei.com/vosk/models/vosk-model-spk-0.4.zip -P $VOSK_DIR
-# english punctuation model
+# english punctuation model (never tested)
 wget -N https://alphacephei.com/vosk/models/vosk-recasepunc-en-0.22.zip -P $VOSK_DIR
 
 # unzip models
