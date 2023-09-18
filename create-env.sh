@@ -47,7 +47,7 @@ pyspark \
 selenium scrapy \
 python-confluent-kafka \
 tweepy
-# jupyterlab-spellchecker
+jupyterlab-spellchecker
 
 conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
 
