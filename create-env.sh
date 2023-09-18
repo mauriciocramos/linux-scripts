@@ -33,8 +33,7 @@ conda update -y -n base conda
 
 # Base environment
 conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" "python<3.11" \
-"jupyterlab<4" nodejs jupyterlab_execute_time jupyterlab-git \
-jupyterlab_code_formatter autopep8 isort black \
+"jupyterlab<4" nodejs jupyterlab_execute_time jupyterlab-git jupyterlab-spellchecker jupyterlab_code_formatter autopep8 isort black \
 numpy scipy pandas \
 openpyxl \
 sqlalchemy trino-python-client \
@@ -47,7 +46,6 @@ pyspark \
 selenium scrapy \
 python-confluent-kafka \
 tweepy
-jupyterlab-spellchecker
 
 conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
 
