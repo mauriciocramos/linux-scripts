@@ -30,7 +30,7 @@ ls "$ENVDIR"
 
 conda update -y -n base conda
 
-# Past packages: grid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
+# Past packages: grid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial tweepy pyperclip
 
 # Base environment RELEASE CONTROL
 # Numba: https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
@@ -52,7 +52,6 @@ ffmpeg pydub \
 boto3 sagemaker \
 networkx nxviz pydot graphviz
 #numba dask \
-#tweepy \
 
 conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
 
@@ -63,10 +62,10 @@ conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatool
 ##conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
 #
 ## Tensorflow conda package is not built with tensorrt
-#conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
+conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
 #
 ## Pytorch (cudatoolkit=11.8, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
-#conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
+conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
 #
 ## NLP packages
 conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud gensim textblob langdetect textstat
