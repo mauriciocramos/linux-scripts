@@ -17,6 +17,7 @@ echo "WARNING: Previously created environment $1 will be removed"
 echo
 read -rsp $'Press enter to continue...\n'
 START_TIME=$(date +%s)
+date
 
 source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within a script
 # remove previous environment
@@ -29,35 +30,34 @@ ls "$ENVDIR"
 
 conda update -y -n base conda
 
-# Past packages still not installed: plotly qgrid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
+# Past packages: grid pyaudio html5lib geopy google-api-python-client google-cloud-speech numpy-financial pyperclip
 
-# Base environment
+# Base environment RELEASE CONTROL
 # Numba: https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
 # AWS 2020-11-30: numba=0.52.x->python>=3.6<3.9->numpy>=1.15<1.20->llvmlite=0.35->LLVM=10->TBB>=2019.5<2020.3
 # rig 2023-06-21: numba=0.57.1->python>=3.8<3.12->numpy>=1.21<1.25-llvmlite=0.40->LLVM=14->TBB>=2021.6
-
 conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" \
-"python<3.11" \
-boto3 sagemaker \
+"python<3.9" \
 "jupyterlab<4" nodejs "jupyterlab_execute_time<3" jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
-numba numpy dask \
-statsmodels scipy \
+numpy scipy statsmodels \
 pandas openpyxl \
-matplotlib seaborn bokeh plotly \
+matplotlib seaborn #bokeh plotly \
 scikit-learn \
-sqlalchemy trino-python-client \
-pyspark \
-python-confluent-kafka \
-dnspython pymongo \
 selenium scrapy \
-#ffmpeg pydub \
+sqlalchemy trino-python-client \
+pymongo dnspython \
+python-confluent-kafka \
+pyspark \
+ffmpeg pydub \
+boto3 sagemaker \
+networkx nxviz pydot graphviz
+#numba dask \
 #tweepy \
-#networkx nxviz pydot graphviz
 
 conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
 
 ## CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
-#conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatoolkit
+conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatoolkit
 #
 ## RAPIDS https://rapids.ai/#quick-start
 ##conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
@@ -69,15 +69,14 @@ conda activate "$1" # mainly because of late pip installations because conda's e
 #conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
 #
 ## NLP packages
-#conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud \
-## gensim textblob langdetect textstat
+conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud gensim textblob langdetect textstat
 #
 ##echo '*******************************************'
 ##echo 'Pip installations after conda installations'
 ##echo '*******************************************'
-#pip install --upgrade pip
-#pip install vosk
-#pip install textatistic
+pip install --upgrade pip
+pip install vosk
+pip install textatistic
 ## https://www.adriangb.com/scikeras/stable/install.html#users-installation
 #pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
 #pip install kafka-python
