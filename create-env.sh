@@ -41,7 +41,7 @@ conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$
 "jupyterlab<4" nodejs "jupyterlab_execute_time<3" jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
 numpy scipy statsmodels \
 pandas openpyxl \
-matplotlib seaborn #bokeh plotly \
+matplotlib seaborn \
 scikit-learn \
 selenium scrapy \
 sqlalchemy trino-python-client \
@@ -51,6 +51,7 @@ pyspark \
 ffmpeg pydub \
 boto3 sagemaker \
 networkx nxviz pydot graphviz
+#bokeh plotly \
 #numba dask \
 
 conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
