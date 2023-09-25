@@ -55,30 +55,30 @@ networkx nxviz pydot graphviz
 
 conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
 
-## CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
+# CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
 conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatoolkit
-#
-## RAPIDS https://rapids.ai/#quick-start
-##conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
-#
-## Tensorflow conda package is not built with tensorrt
+
+# RAPIDS https://rapids.ai/#quick-start
+#conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
+
+# Tensorflow conda package is not built with tensorrt
 conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
-#
-## Pytorch (cudatoolkit=11.8, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
+
+# Pytorch (cudatoolkit=11.8, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
 conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
-#
-## NLP packages
+
+# NLP packages
 conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud gensim textblob langdetect textstat
-#
-##echo '*******************************************'
-##echo 'Pip installations after conda installations'
-##echo '*******************************************'
+
+echo '*******************************************'
+echo 'Pip installations after conda installations'
+echo '*******************************************'
 pip install --upgrade pip
 pip install vosk
 pip install textatistic
-## https://www.adriangb.com/scikeras/stable/install.html#users-installation
-#pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
-#pip install kafka-python
+# https://www.adriangb.com/scikeras/stable/install.html#users-installation
+pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
+pip install kafka-python
 
 # post install
 conda config --set auto_activate_base false
