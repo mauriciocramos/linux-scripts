@@ -49,7 +49,7 @@ pymongo dnspython \
 python-confluent-kafka \
 pyspark \
 ffmpeg pydub \
-boto3  \
+boto3 \
 networkx nxviz pydot graphviz
 #sagemaker
 #bokeh plotly \
