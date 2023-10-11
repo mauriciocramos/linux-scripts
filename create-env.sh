@@ -50,7 +50,8 @@ python-confluent-kafka \
 pyspark \
 ffmpeg pydub \
 boto3 \
-networkx nxviz pydot graphviz
+networkx nxviz pydot graphviz \
+great-expectations
 #sagemaker
 #bokeh plotly \
 #numba dask \
