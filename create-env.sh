@@ -37,7 +37,7 @@ conda update -y -n base conda
 # AWS 2020-11-30: numba=0.52.x->python>=3.6<3.9->numpy>=1.15<1.20->llvmlite=0.35->LLVM=10->TBB>=2019.5<2020.3
 # rig 2023-06-21: numba=0.57.1->python>=3.8<3.12->numpy>=1.21<1.25-llvmlite=0.40->LLVM=14->TBB>=2021.6
 conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" \
-"python<3.9" \
+"python<3.10" \
 "jupyterlab<4" nodejs "jupyterlab_execute_time<3" jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
 numpy scipy statsmodels \
 pandas openpyxl \
@@ -65,7 +65,7 @@ conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatool
 #conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
 
 # Tensorflow conda package is not built with tensorrt
-conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
+#conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
 
 # Pytorch (cudatoolkit=11.8, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
 conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
@@ -77,10 +77,11 @@ echo '*******************************************'
 echo 'Pip installations after conda installations'
 echo '*******************************************'
 pip install --upgrade pip
+# pip install tensorflow
 pip install vosk
 pip install textatistic
 # https://www.adriangb.com/scikeras/stable/install.html#users-installation
-pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
+# pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
 pip install kafka-python
 
 # post install
