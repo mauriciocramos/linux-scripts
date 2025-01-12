@@ -3,7 +3,7 @@ clear
 echo '****************************************************'
 echo 'Conda Data Science environment creation'
 echo 'Author: Mauricio Ramos (mauriciocramos at gmail.com)'
-echo 'Date created: 17/8/2020 Date changed: 7/9/2023'
+echo 'Date created: 17/8/2020 Date changed: 10/1/2025'
 echo 'Usage: create-env.sh dev'
 echo '****************************************************'
 
@@ -23,7 +23,7 @@ source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within 
 # remove previous environment
 conda deactivate
 conda info
-conda env remove --name "$1"
+conda env remove --name "$1" $2
 ENVDIR=$HOME/miniconda3/envs/
 rm "$ENVDIR$1" -rf
 ls "$ENVDIR"
@@ -36,42 +36,43 @@ conda update -y -n base conda
 # Numba: https://numba.readthedocs.io/en/stable/user/installing.html#version-support-information
 # AWS 2020-11-30: numba=0.52.x->python>=3.6<3.9->numpy>=1.15<1.20->llvmlite=0.35->LLVM=10->TBB>=2019.5<2020.3
 # rig 2023-06-21: numba=0.57.1->python>=3.8<3.12->numpy>=1.21<1.25-llvmlite=0.40->LLVM=14->TBB>=2021.6
-conda create --no-default-packages --override-channels -c conda-forge "$2" -n "$1" \
-"python<3.10" \
-"jupyterlab<4" nodejs "jupyterlab_execute_time<3" jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
-numpy scipy statsmodels \
+# rig 2024: python<3.10 jupyterlab<4 jupyterlab_execute_time<3
+conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13" \
+jupyterlab nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
+"numpy=1.26.4" scipy statsmodels \
 pandas openpyxl \
 matplotlib seaborn \
 scikit-learn \
 selenium scrapy \
-sqlalchemy trino-python-client \
+sqlalchemy \
 pymongo dnspython \
 python-confluent-kafka \
 pyspark \
 ffmpeg pydub \
-boto3 \
 networkx nxviz pydot graphviz \
 great-expectations
-#sagemaker
-#bokeh plotly \
-#numba dask \
+# boto3 \
+# trino-python-client \
+# sagemaker \
+# bokeh plotly \
+# numba dask \
 
-conda activate "$1" # mainly because of late pip installations because conda's explicit --name "$1"
+conda activate "$1" # mainly for late pip installations because conda's explicit --name "$1"
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
-conda install --override-channels -c conda-forge -c nvidia "$2" -n "$1" cudatoolkit
+conda install -n "$1" -c conda-forge -c nvidia --override-channels $2  cudatoolkit
 
 # RAPIDS https://rapids.ai/#quick-start
-#conda install --override-channels -c rapidsai -c conda-forge -c nvidia $2 -n $1 "rapids=23.06"
+# conda install -n "$1" -c rapidsai -c conda-forge -c nvidia --override-channels $2 "rapids=23.06"
 
 # Tensorflow conda package is not built with tensorrt
-#conda install --override-channels -c conda-forge "$2" -n "$1" tensorflow
+conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
 
 # Pytorch (cudatoolkit=11.8, ffmpeg.  Required by spacy on GPU) https://pytorch.org/get-started/locally/
-conda install --override-channels -c pytorch -c nvidia -c conda-forge "$2" -n "$1" pytorch torchvision torchaudio "pytorch-cuda=11.8"
+conda install -n "$1" -c pytorch -c nvidia -c conda-forge --override-channels $2 pytorch torchvision torchaudio "pytorch-cuda=11.8"
 
 # NLP packages
-conda install --override-channels -c conda-forge "$2" -n "$1" nltk spacy spacy-transformers wordcloud gensim textblob langdetect textstat
+conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy spacy-transformers wordcloud gensim textblob langdetect textstat
 
 echo '*******************************************'
 echo 'Pip installations after conda installations'
@@ -81,8 +82,7 @@ pip install --upgrade pip
 pip install vosk
 pip install textatistic
 # https://www.adriangb.com/scikeras/stable/install.html#users-installation
-# pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
-pip install kafka-python
+pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
 
 # post install
 conda config --set auto_activate_base false
