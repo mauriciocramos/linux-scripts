@@ -50,7 +50,7 @@ python-confluent-kafka \
 pyspark \
 ffmpeg pydub \
 networkx nxviz pydot graphviz \
-great-expectations
+great-expectations shap
 # boto3 \
 # trino-python-client \
 # sagemaker \
