@@ -25,17 +25,17 @@ pip install spacy-lookups-data
 # English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer.
 python -m spacy download en_core_web_sm # no static word vectors
 # English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer.
-python -m spacy download en_core_web_md # word vectors: 514k keys, 20k unique vectors (300 dimensions)
+python -m spacy download en_core_web_md # word vectors: 685k keys, 20k unique vectors (300 dimensions)
 # English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer.
-python -m spacy download en_core_web_lg # word vectors: 514k keys, 514k unique vectors (300 dimensions)
+python -m spacy download en_core_web_lg # word vectors: 685k keys, 343k unique vectors (300 dimensions)
 # English transformer pipeline (roberta-base). Components: transformer, tagger, parser, ner, attribute_ruler, lemmatizer.
 python -m spacy download en_core_web_trf # no static word vectors
 
-# Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer (trainable_lemmatizer), senter, ner, attribute_ruler.
+# Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer, senter, attribute_ruler, ner
 python -m spacy download pt_core_news_sm # no static word vectors
-# Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer (trainable_lemmatizer), senter, ner, attribute_ruler.
+# Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer, senter, attribute_ruler, ner
 python -m spacy download pt_core_news_md # word vectors: 500k keys, 20k unique vectors (300 dimensions)
-# Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer (trainable_lemmatizer), senter, ner, attribute_ruler.
+# Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer, senter, attribute_ruler, ner
 python -m spacy download pt_core_news_lg # word vectors: 500k keys, 500k unique vectors (300 dimensions)
 
 # Multi-language pipeline optimized for CPU. Components: ner.
