@@ -59,7 +59,8 @@ conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cudatoolki
 # Pytorch Conda packages are no longer available in pytorch conda channel: https://pytorch.org/get-started/locally/
 # Officially: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 # Alternative:
-conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity #"pytorch-cuda=11.8" no longer needed?
+conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity \
+torchtext # <- deprectated since April 2024 but datacamp still uses it
 
 # Tensorflow conda package is not built with tensorrt
 # Officially: pip install tensorflow
