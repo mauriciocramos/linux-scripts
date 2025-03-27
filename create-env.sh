@@ -56,6 +56,10 @@ conda activate "$1" # mainly for late pip installations because conda explicit -
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
 conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cudatoolkit
 
+# Huggging Face NLP for TensorFlow 2.0 and PyTorch
+# TODO: check why pytorch and etc are downgrading transformers to the year 2022.
+conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5"
+
 # Pytorch Conda packages are no longer available in pytorch conda channel: https://pytorch.org/get-started/locally/
 # Officially: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 # Alternative:
@@ -68,7 +72,7 @@ torchtext # <- deprectated since April 2024 but datacamp still uses it
 # conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
 
 # NLP packages
-conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy cupy spacy-transformers langchain transformers shap wordcloud gensim textblob langdetect textstat
+conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy cupy spacy-transformers langchain shap wordcloud gensim textblob langdetect textstat
 
 echo '*******************************************'
 echo 'Pip installations after conda installations'
