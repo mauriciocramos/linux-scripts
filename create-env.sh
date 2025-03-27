@@ -68,7 +68,7 @@ torchtext # <- deprectated since April 2024 but datacamp still uses it
 # conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
 
 # NLP packages
-conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy cupy spacy-transformers langchain shap wordcloud gensim textblob langdetect textstat
+conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy cupy spacy-transformers langchain transformers shap wordcloud gensim textblob langdetect textstat
 
 echo '*******************************************'
 echo 'Pip installations after conda installations'
