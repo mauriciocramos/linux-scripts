@@ -79,6 +79,7 @@ echo 'Pip installations after conda installations'
 echo '*******************************************'
 pip install --upgrade pip
 pip install vosk
+pip install leia
 # pip install textatistic # asked for gcc?
 # https://www.adriangb.com/scikeras/stable/install.html#users-installation
 # pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
