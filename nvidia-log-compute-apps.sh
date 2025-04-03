@@ -14,9 +14,9 @@
 ##-f nvidia-compute-apps.csv
 
 # basic
-watch -n1 nvidia-smi --query-compute-apps=\
+nvidia-smi --query-compute-apps=\
 timestamp,\
 pid,\
 process_name,\
 used_gpu_memory \
---format=csv
+--format=csv -l 1

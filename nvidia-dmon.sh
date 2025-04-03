@@ -25,4 +25,4 @@
 #                               PCIe TX              = 20
 #                               PCIe RX              = 21
 
-nvidia-smi dmon -s pucvmt #--gpm-metrics 1,2,3,4,5,6,7,9,10,11,12,13,20,21
+nvidia-smi dmon -o DT -s pucvmt --gpm-metrics 1,2,3,4,5,6,7,9,10,11,12,13,20,21 -d 2
