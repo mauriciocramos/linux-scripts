@@ -55,6 +55,8 @@ conda activate "$1" # mainly for late pip installations because conda explicit -
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
 conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cudatoolkit
+conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cuda-nvcc
+conda install -n "$1" -c conda-forge --override-channels $2 pynvml
 
 # Huggging Face NLP for TensorFlow 2.0 and PyTorch
 # TODO: check why pytorch and etc are downgrading transformers to the year 2022.
