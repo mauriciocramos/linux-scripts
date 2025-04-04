@@ -55,23 +55,22 @@ conda activate "$1" # mainly for late pip installations because conda explicit -
 
 # CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
 conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cudatoolkit
-conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cuda-nvcc
-conda install -n "$1" -c conda-forge --override-channels $2 pynvml
-
-# Huggging Face NLP for TensorFlow 2.0 and PyTorch
-# TODO: check why pytorch and etc are downgrading transformers to the year 2022.
-conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5"
 
 # Pytorch Conda packages are no longer available in pytorch conda channel: https://pytorch.org/get-started/locally/
 # Officially: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 # Alternative:
 conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity \
-torchtext # <- deprectated since April 2024 but datacamp still uses it
+torchtext # <- TODO: deprectated since April 2024 but datacamp still uses it merely for a tokenizer
 
-# Tensorflow conda package is not built with tensorrt
-# Officially: pip install tensorflow
-# Alternative:
+# Pytorch CUDA requires these two for some backends and tools
+conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cuda-nvcc
+conda install -n "$1" -c conda-forge --override-channels $2 pynvml
+
+# Tensorflow conda package is not built with tensorrt. Officially: pip install tensorflow
 # conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
+
+# Huggging Face NLP for TensorFlow 2.0 and PyTorch
+conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5"
 
 # NLP packages
 conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy cupy spacy-transformers langchain shap wordcloud gensim textblob langdetect textstat
