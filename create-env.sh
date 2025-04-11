@@ -59,8 +59,7 @@ conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cudatoolki
 # Pytorch Conda packages are no longer available in pytorch conda channel: https://pytorch.org/get-started/locally/
 # Officially: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 # Alternative:
-conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity \
-torchtext # <- TODO: deprectated since April 2024 but datacamp still uses it merely for a tokenizer
+conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity
 
 # Pytorch CUDA requires these two for some backends and tools
 conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cuda-nvcc
