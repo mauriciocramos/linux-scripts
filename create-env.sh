@@ -69,7 +69,7 @@ conda install -n "$1" -c conda-forge --override-channels $2 pynvml
 # conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
 
 # Huggging Face NLP for TensorFlow 2.0 and PyTorch
-conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5"
+conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5" sentencepiece sacremoses
 
 # NLP packages
 conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy cupy spacy-transformers langchain shap wordcloud gensim textblob langdetect textstat
