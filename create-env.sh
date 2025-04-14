@@ -69,7 +69,7 @@ conda install -n "$1" -c conda-forge --override-channels $2 pynvml
 # conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
 
 # Huggging Face NLP for TensorFlow 2.0 and PyTorch
-conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5" sentencepiece sacremoses
+conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5" sentencepiece sacremoses "datasets>=3.5"
 
 # NLP packages
 # spacy-transformers is on hold because it is forcing outdated (2022) version of hugging face's transformers which I still never trained
