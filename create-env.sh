@@ -62,8 +62,7 @@ conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cudatoolki
 conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity
 
 # Pytorch CUDA requires these two for some backends and tools
-conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cuda-nvcc
-conda install -n "$1" -c conda-forge --override-channels $2 pynvml
+conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cuda-nvcc pynvml
 
 # Tensorflow conda package is not built with tensorrt. Officially: pip install tensorflow
 # conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
