@@ -72,7 +72,8 @@ conda install -n "$1" -c conda-forge --override-channels $2 pynvml
 conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5" sentencepiece sacremoses
 
 # NLP packages
-conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy cupy spacy-transformers langchain shap wordcloud gensim textblob langdetect textstat
+# spacy-transformers is on hold because it is forcing outdated (2022) version of hugging face's transformers which I still never trained
+conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy langchain shap wordcloud gensim textblob langdetect textstat
 
 echo '*******************************************'
 echo 'Pip installations after conda installations'
