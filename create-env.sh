@@ -81,6 +81,7 @@ pip install --upgrade pip
 pip install vosk
 pip install leia
 pip install hf_xet # Xet Storage suggested by HF's Transformers
+pip install rouge-score # required buy HF's evaluate metric ROUGE
 # pip install textatistic # asked for gcc?
 # https://www.adriangb.com/scikeras/stable/install.html#users-installation
 # pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
