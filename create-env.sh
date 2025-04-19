@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+
 echo '****************************************************'
 echo 'Conda Data Science environment creation'
 echo 'Author: Mauricio Ramos (mauriciocramos at gmail.com)'
@@ -23,7 +24,7 @@ source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within 
 # remove previous environment
 conda deactivate
 conda info
-conda env remove --name "$1" $2
+conda env remove -q -n "$1" $2
 ENVDIR=$HOME/miniconda3/envs/
 rm "$ENVDIR$1" -rf
 ls "$ENVDIR"
@@ -31,60 +32,63 @@ ls "$ENVDIR"
 conda update -y -n base conda
 
 # Base environment
-conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages python \
-"jupyterlab<4.3" nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
-numpy scipy statsmodels \
+conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13" \
+jupyterlab nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
+numpy \
+scipy statsmodels \
 pandas openpyxl \
 matplotlib seaborn \
-scikit-learn \
+scikit-learn nltk \
+selenium scrapy \
 sqlalchemy \
 pymongo dnspython \
-selenium scrapy \
-ffmpeg pydub \
-python-confluent-kafka \
-networkx nxviz pydot graphviz \
-great-expectations \
-pyspark
-# boto3 \
-# trino-python-client \
-# sagemaker \
-# bokeh plotly \
-# numba dask \
+# TODO: pyspark is on hold because conda required numpy=1.26.4 while pip installs fine over numpy=2.2.4
+# TODO: Used in courses but no longer used: pydub python-confluent-kafka networkx nxviz pydot graphviz
+# TODO: never tested this UI:  great-expectations
 
 conda activate "$1" # mainly for late pip installations because conda explicit --name "$1"
 
-# CUDA Toolkit (used by tensorflow, rapids, py-xgboost-gpu, spacy and pytorch)
-conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cudatoolkit
+# Pytorch no longer officially supports conda: https://pytorch.org/get-started/locally/
+# Pytorch officially supports: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity
 
-# Pytorch Conda packages are no longer available in pytorch conda channel: https://pytorch.org/get-started/locally/
-# Officially: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-# Alternative:
-conda install -n "$1" -c conda-forge --override-channels $2 pytorch-gpu torchvision torchaudio torchmetrics torch-fidelity
+# TODO: tensorflow Not used beyond courses
+# Tensorflow conda package is not built with tensorrt.
+# Official: pip install tensorflow
+# Unofficial: conda  install -n "$1" -c conda-forge --override-channels $2 tensorflow
 
-# Pytorch CUDA requires these two for some backends and tools
-conda install -n "$1" -c conda-forge -c nvidia --override-channels $2 cuda-nvcc pynvml
-
-# Tensorflow conda package is not built with tensorrt. Officially: pip install tensorflow
-# conda install -n "$1" -c conda-forge --override-channels $2 tensorflow
-
-# Huggging Face NLP for TensorFlow 2.0 and PyTorch
-conda install -n "$1" -c conda-forge --override-channels $2 "transformers>=4.5" sentencepiece sacremoses "datasets>=3.5" "accelerate>=0.26.0" evaluate absl-py
+# Huggging Face NLP for PyTorch and TensorFlow
+#conda install -n "$1" -c conda-forge --override-channels $2 transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
 
 # NLP packages
-# spacy-transformers is on hold because it is forcing outdated (2022) version of hugging face's transformers which I still never trained
-conda install -n "$1" -c conda-forge --override-channels $2 nltk spacy langchain shap wordcloud gensim textblob langdetect textstat
+# TODO: spacy-transformers is on hold because it is forcing outdated (2022) version of HF transformers
+# TODO: gensim is on hold because conda required numpy<2, conflicting to "numpy>=2.2.4"
+# TODO: langchain is on hold because conda required numpy=1.26.4
+#conda install -n "$1" -c conda-forge --override-channels $2  spacy cupy wordcloud # shap textblob langdetect textstat
 
 echo '*******************************************'
 echo 'Pip installations after conda installations'
 echo '*******************************************'
-pip install --upgrade pip
+pip install --upgrade pip setuptools wheel
 pip install vosk
 pip install leia
+
+pip install torch torchvision torchaudio torchmetrics torch-fidelity
+
+pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
+
 pip install hf_xet # Xet Storage suggested by HF's Transformers
-pip install rouge-score # required buy HF's evaluate metric ROUGE
-# pip install textatistic # asked for gcc?
-# https://www.adriangb.com/scikeras/stable/install.html#users-installation
-# pip install --no-deps "scikeras[tensorflow]" # TODO: replace by pip install keras-tuner https://keras.io/keras_tuner/
+pip install rouge-score # required by HF's evaluate metric ROUGE
+
+# Llama's:
+CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir #--verbose --force-reinstall # https://github.com/abetlen/llama-cpp-python#supported-backends
+# pip install llama-cpp-python --no-cache-dir --verbose # CPU-ONLY
+# pip install llama-cpp-python --no-cache-dir --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124 # https://github.com/abetlen/llama-cpp-python#supported-backends
+# pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
+
+# TODO: replace scikeras by keras_tunner: https://keras.io/keras_tuner/
+# scikeras: https://www.adriangb.com/scikeras/stable/install.html#users-installation
+# pip install --no-deps "scikeras[tensorflow]" # pip install keras-tuner
 
 # post install
 conda config --set auto_activate_base false
