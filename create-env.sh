@@ -76,6 +76,9 @@ pip install leia
 pip install torch torchvision torchaudio torchmetrics torch-fidelity
 
 pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
+pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
+pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
+pip install bitsandbytes
 
 pip install hf_xet # Xet Storage suggested by HF's Transformers
 pip install rouge-score # required by HF's evaluate metric ROUGE
@@ -85,6 +88,9 @@ CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir #--verbo
 # pip install llama-cpp-python --no-cache-dir --verbose # CPU-ONLY
 # pip install llama-cpp-python --no-cache-dir --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124 # https://github.com/abetlen/llama-cpp-python#supported-backends
 # pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
+
+# Modular Active Learning framework for Python3 (very old at Apr 2025)
+pip install modAL-python
 
 # TODO: replace scikeras by keras_tunner: https://keras.io/keras_tuner/
 # scikeras: https://www.adriangb.com/scikeras/stable/install.html#users-installation
