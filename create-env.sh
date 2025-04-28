@@ -33,7 +33,7 @@ conda update -y -n base conda
 
 # Base environment
 conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13" \
-jupyterlab jupyterlab_widgets ipywidgets jupyter-ai nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
+jupyterlab jupyterlab_widgets ipywidgets dejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
 numpy \
 scipy statsmodels \
 pandas openpyxl \
@@ -79,6 +79,7 @@ pip install transformers sentencepiece sacremoses datasets accelerate evaluate a
 pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
 pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
 pip install bitsandbytes
+pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
 
 pip install hf_xet # Xet Storage suggested by HF's Transformers
 pip install rouge-score # required by HF's evaluate metric ROUGE
