@@ -33,7 +33,7 @@ conda update -y -n base conda
 
 # Base environment
 conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13" \
-jupyterlab jupyterlab_widgets ipywidgets dejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
+jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
 numpy \
 scipy statsmodels \
 pandas openpyxl \
@@ -41,7 +41,7 @@ matplotlib seaborn \
 scikit-learn nltk \
 selenium scrapy \
 sqlalchemy \
-pymongo dnspython \
+pymongo dnspython
 # TODO: pyspark is on hold because conda required numpy=1.26.4 while pip installs fine over numpy=2.2.4
 # TODO: Used in courses but no longer used: pydub python-confluent-kafka networkx nxviz pydot graphviz
 # TODO: never tested this UI:  great-expectations
@@ -73,7 +73,7 @@ pip install --upgrade pip setuptools wheel
 pip install vosk
 pip install leia
 
-pip install torch torchvision torchaudio torchmetrics torch-fidelity
+pip install torch torchvision torchaudio torchmetrics torch-fidelity torchtune torchao
 
 pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
 pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
