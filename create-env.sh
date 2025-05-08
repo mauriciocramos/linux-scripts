@@ -41,7 +41,8 @@ matplotlib seaborn \
 scikit-learn nltk \
 selenium scrapy \
 sqlalchemy \
-pymongo dnspython
+pymongo dnspython \
+pypdf
 # TODO: pyspark is on hold because conda required numpy=1.26.4 while pip installs fine over numpy=2.2.4
 # TODO: Used in courses but no longer used: pydub python-confluent-kafka networkx nxviz pydot graphviz
 # TODO: never tested this UI:  great-expectations
