@@ -99,7 +99,7 @@ pip install modAL-python
 # pip install --no-deps "scikeras[tensorflow]" # pip install keras-tuner
 
 # post install
-conda config --set auto_activate_base false
+conda config --set default_activation_env "$1"
 conda info
 
 END_TIME=$(date +%s)
