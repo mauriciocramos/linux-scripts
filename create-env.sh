@@ -32,11 +32,11 @@ ls "$ENVDIR"
 conda update -y -n base conda
 
 # Base environment
-conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13" \
+conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages python \
 jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
 numpy \
 scipy statsmodels \
-pandas openpyxl \
+pandas pandas-stubs openpyxl \
 matplotlib seaborn \
 scikit-learn nltk \
 selenium scrapy \
