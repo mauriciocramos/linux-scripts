@@ -24,6 +24,7 @@ source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within 
 # remove previous environment
 conda deactivate
 conda info
+conda config --set default_activation_env base # otherwise conda remove fails
 conda env remove -q -n "$1" $2
 ENVDIR=$HOME/miniconda3/envs/
 rm "$ENVDIR$1" -rf
