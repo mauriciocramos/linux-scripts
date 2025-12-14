@@ -1,5 +1,5 @@
 #!/bin/bash
-# clear
+clear
 
 echo '****************************************************'
 echo 'Conda Data Science environment creation'
