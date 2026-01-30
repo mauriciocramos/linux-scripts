@@ -68,8 +68,9 @@ pip install hf_xet # Xet Storage suggested by HF's Transformers
 pip install rouge-score # required by HF's evaluate metric ROUGE
 
 # TODO: as of 31/1/26 spacy 3.8.11 downgrades numpy=1.26.4 of 5/2/24:
-# TODO: pip install spacy[cuda12x,transformers,lookups]' conflicts HF's transformers
+# TODO: pip install spacy[cuda12x,transformers,lookups]' required to train own models but still conflicts to HF's transformers
 pip install 'spacy[cuda12x]'
+python -m spacy validate
 
 # TODO: gensim requires numpy<2
 pip install gensim
