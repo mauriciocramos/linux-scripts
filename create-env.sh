@@ -38,8 +38,7 @@ conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages
 conda activate "$1"
 
 pip install --upgrade pip setuptools wheel
-#pip install "numpy<2" \
-pip install numpy \
+pip install "numpy<2" \
 jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
 scipy statsmodels \
 pandas pandas-stubs openpyxl \
@@ -49,33 +48,32 @@ selenium scrapy \
 sqlalchemy \
 pymongo dnspython \
 pypdf
-# TODO: pyspark
-# TODO: Used in courses but no longer used: pydub python-confluent-kafka networkx nxviz pydot graphviz
+# TODO: Not using quite sometime: pyspark pydub python-confluent-kafka networkx nxviz pydot graphviz
 
-# Pytorch's
-# TODO: update pytorch wheels url from time to time for cuda upgrade
-pip install torch torchvision torchaudio torchmetrics torchao # --index-url https://download.pytorch.org/whl/cu130 # for cuda 13.0
-pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
-pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
+## Pytorch's
+## TODO: update pytorch wheels url from time to time for cuda upgrade
+#pip install torch torchvision torchaudio torchmetrics torchao # --index-url https://download.pytorch.org/whl/cu130 # for cuda 13.0
+#pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
+#pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
+## Hugging Face's:
+#pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
+#pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
+#pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
+#pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
+#pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
+#pip install hf_xet # Xet Storage suggested by HF's Transformers
+#pip install rouge-score # required by HF's evaluate metric ROUGE
 
-# Hugging Face's:
-pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
-pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
-pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
-pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
-pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
-pip install hf_xet # Xet Storage suggested by HF's Transformers
-pip install rouge-score # required by HF's evaluate metric ROUGE
-
+# Spacy's
 # TODO: as of 31/1/26 spacy 3.8.11 downgrades numpy=1.26.4 of 5/2/24:
 # TODO: pip install spacy[cuda12x,transformers,lookups]' required to train own models but still conflicts to HF's transformers
-pip install 'spacy[cuda12x]'
-python -m spacy validate
+#pip install 'spacy[cuda12x]'
+pip install 'spacy[cuda12x,transformers,lookups]'
 
 # TODO: gensim requires numpy<2
 pip install gensim
 
-# TODO: langchain is on hold because conda required numpy=1.26.4
+# TODO: langchain requires numpy<2
 pip install langchain
 
 # NLP's:
