@@ -39,20 +39,20 @@ conda activate "$1"
 
 pip install --upgrade pip setuptools wheel
 pip install "numpy<2" \
-jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
-scipy statsmodels \
-pandas pandas-stubs openpyxl \
-matplotlib seaborn \
-scikit-learn nltk \
-selenium scrapy \
-sqlalchemy \
-pymongo dnspython \
-pypdf
+#jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
+#scipy statsmodels \
+#pandas pandas-stubs openpyxl \
+#matplotlib seaborn \
+#scikit-learn nltk \
+#selenium scrapy \
+#sqlalchemy \
+#pymongo dnspython \
+#pypdf
 # TODO: Not using quite sometime: pyspark pydub python-confluent-kafka networkx nxviz pydot graphviz
 
 ## Pytorch's
 ## TODO: update pytorch wheels url from time to time for cuda upgrade
-#pip install torch torchvision torchaudio torchmetrics torchao # --index-url https://download.pytorch.org/whl/cu130 # for cuda 13.0
+#pip install torch torchvision torchaudio torchmetrics torchao -index-url https://download.pytorch.org/whl/cu130 # for cuda 13.0
 #pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
 #pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
 ## Hugging Face's:
@@ -68,26 +68,26 @@ pypdf
 # TODO: as of 31/1/26 spacy 3.8.11 downgrades numpy=1.26.4 of 5/2/24:
 # TODO: pip install spacy[cuda12x,transformers,lookups]' required to train own models but still conflicts to HF's transformers
 #pip install 'spacy[cuda12x]'
-pip install 'spacy[cuda12x,transformers,lookups]'
+pip install 'spacy[cuda11x,transformers,lookups]'
 
 # TODO: gensim requires numpy<2
-pip install gensim
+#pip install gensim
 
 # TODO: langchain requires numpy<2
-pip install langchain
+#pip install langchain
 
 # NLP's:
-pip install leia vosk wordcloud textblob langdetect
+#pip install leia vosk wordcloud textblob langdetect
 # TODO: shap requires numpy-2.3.5 but spacy requires 1.26.4 (<2)
 
 # Llama's:
-CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir #--verbose --force-reinstall # https://github.com/abetlen/llama-cpp-python#supported-backends
-# pip install llama-cpp-python --no-cache-dir --verbose # CPU-ONLY
-# pip install llama-cpp-python --no-cache-dir --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124 # https://github.com/abetlen/llama-cpp-python#supported-backends
-# pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
+## pip install llama-cpp-python --no-cache-dir --verbose # CPU-ONLY
+## pip install llama-cpp-python --no-cache-dir --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124 # https://github.com/abetlen/llama-cpp-python#supported-backends
+## pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
+#CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir #--verbose --force-reinstall # https://github.com/abetlen/llama-cpp-python#supported-backends
 
 # Modular Active Learning framework for Python3 (very old at Apr 2025)
-pip install modAL-python
+#pip install modAL-python
 
 # post install
 conda config --set default_activation_env "$1"

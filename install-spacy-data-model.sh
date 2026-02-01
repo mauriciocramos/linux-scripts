@@ -15,7 +15,7 @@ source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within 
 conda deactivate
 conda activate $1
 
-# pip install spacy-lookups-data
+# pip install spacy-lookups-data # it seems pip install spacy already gets spacy_lookups_data
 
 # PORTUGUESE MODELS
 # Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer (trainable_lemmatizer),
@@ -45,14 +45,14 @@ python -m spacy download en_core_web_lg
 ## English transformer pipeline (Transformer(name=‘roberta-base’, piece_encoder=‘byte-bpe’, stride=104, type=‘roberta’,
 ## width=768, window=144, vocab_size=50265)). Components: transformer, tagger, parser, ner, attribute_ruler, lemmatizer.
 ## vectors: 0 keys, 0 unique vectors (0 dimensions)
-#python -m spacy download en_core_web_trf
+python -m spacy download en_core_web_trf
 
 
 ## MULTI-LANGUAGE MODELS
 ## Multi-language pipeline optimized for CPU. Components: ner.
-#python -m spacy download xx_ent_wiki_sm
+python -m spacy download xx_ent_wiki_sm
 ## Multi-language pipeline optimized for CPU. Components: senter.
-#python -m spacy download xx_sent_ud_sm
+python -m spacy download xx_sent_ud_sm
 
 # verify installation
 python -m spacy validate
