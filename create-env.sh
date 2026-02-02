@@ -50,6 +50,12 @@ pymongo dnspython \
 pypdf
 # TODO: Not using quite sometime: pyspark pydub python-confluent-kafka networkx nxviz pydot graphviz
 
+# Spacy's
+# TODO: as of 31/1/26 spacy 3.8.11 downgrades numpy=1.26.4 of 5/2/24:
+#pip install 'spacy[cuda12x,transformers,lookups]'
+# TODO: as of 31/1/26 spacy[cuda12x,transformers,lookups] breaks spacy model installs so cuda11x
+pip install 'spacy[cuda11x,transformers,lookups]'
+
 # Pytorch's
 # TODO: update pytorch wheels url from time to time for cuda upgrade
 pip install torch torchvision torchaudio torchmetrics torchao #-index-url https://download.pytorch.org/whl/cu130 # for cuda 13.0
@@ -63,12 +69,6 @@ pip install bitsandbytes # accessible large language models via k-bit quantizati
 pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
 pip install hf_xet # Xet Storage suggested by HF's Transformers
 pip install rouge-score # required by HF's evaluate metric ROUGE
-
-# Spacy's
-# TODO: as of 31/1/26 spacy 3.8.11 downgrades numpy=1.26.4 of 5/2/24:
-#pip install 'spacy[cuda12x,transformers,lookups]'
-# TODO: as of 31/1/26 spacy[cuda12x,transformers,lookups] breaks spacy model installs so cuda11x
-pip install 'spacy[cuda11x,transformers,lookups]'
 
 # TODO: gensim requires numpy<2
 pip install gensim
