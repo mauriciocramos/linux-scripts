@@ -50,25 +50,31 @@ pymongo dnspython \
 pypdf
 # TODO: Not using quite sometime: pyspark pydub python-confluent-kafka networkx nxviz pydot graphviz
 
+echo '****************'
+echo 'Installing Spacy'
+echo '****************'
 # Spacy's
 # TODO: as of 31/1/26 spacy 3.8.11 downgrades numpy=1.26.4 of 5/2/24:
 #pip install 'spacy[cuda12x,transformers,lookups]'
 # TODO: as of 31/1/26 spacy[cuda12x,transformers,lookups] breaks spacy model installs so cuda11x
 pip install 'spacy[cuda11x,transformers,lookups]'
 
-# Pytorch's
-# TODO: update pytorch wheels url from time to time for cuda upgrade
-pip install torch torchvision torchaudio torchmetrics torchao #-index-url https://download.pytorch.org/whl/cu130 # for cuda 13.0
-pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
-pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
-# Hugging Face's:
-pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
-pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
-pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
-pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
-pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
-pip install hf_xet # Xet Storage suggested by HF's Transformers
-pip install rouge-score # required by HF's evaluate metric ROUGE
+#echo '****************'
+#echo 'Installing Torch'
+#echo '****************'
+## Pytorch's
+## TODO: update pytorch wheels url from time to time for cuda upgrade
+#pip install torch torchvision torchaudio torchmetrics torchao #-index-url https://download.pytorch.org/whl/cu130 # for cuda 13.0
+#pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
+#pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
+## Hugging Face's:
+#pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
+#pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
+#pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
+#pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
+#pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
+#pip install hf_xet # Xet Storage suggested by HF's Transformers
+#pip install rouge-score # required by HF's evaluate metric ROUGE
 
 # TODO: gensim requires numpy<2
 pip install gensim
