@@ -17,7 +17,7 @@ conda activate $1
 
 # pip install spacy-lookups-data # it seems pip install spacy already gets spacy_lookups_data
 
-# PORTUGUESE MODELS
+echo Portuguese models
 # Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer (trainable_lemmatizer),
 # senter, ner, attribute_ruler.
 # vectors: 0 keys, 0 unique vectors (0 dimensions)
@@ -31,8 +31,8 @@ python -m spacy download pt_core_news_md
 # vectors: 500k keys, 500k unique vectors (300 dimensions)
 python -m spacy download pt_core_news_lg
 
-
-# ENGLISH MODELS
+echo
+echo English models
 # English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer.
 # vectors: 0 keys, 0 unique vectors (0 dimensions)
 python -m spacy download en_core_web_sm
@@ -47,13 +47,14 @@ python -m spacy download en_core_web_lg
 ## vectors: 0 keys, 0 unique vectors (0 dimensions)
 python -m spacy download en_core_web_trf
 
-
-## MULTI-LANGUAGE MODELS
-## Multi-language pipeline optimized for CPU. Components: ner.
+echo
+echo Multi-language models
+# Multi-language pipeline optimized for CPU. Components: ner.
 python -m spacy download xx_ent_wiki_sm
-## Multi-language pipeline optimized for CPU. Components: senter.
+# Multi-language pipeline optimized for CPU. Components: senter.
 python -m spacy download xx_sent_ud_sm
 
-# verify installation
+echo
+echo Installation validation
 python -m spacy validate
 
