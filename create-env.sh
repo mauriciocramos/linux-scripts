@@ -41,7 +41,7 @@ echo "***************************"
 conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13"
 conda activate "$1"
 pip install --upgrade pip setuptools wheel
-pip install "numpy<2" scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
+pip install -qqq "numpy<2" scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
 autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
 ## TODO: Not using since their courses: pyspark pydub python-confluent-kafka networkx nxviz pydot graphviz
 
@@ -60,17 +60,17 @@ echo
 echo "*****************"
 echo "Installing Cupy's"
 echo "*****************"
-pip install cutensor-cu13 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
-pip install nvidia-cusparselt-cu13 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
-pip install cupy-cuda13x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda11x
-python -c "import cupy; print('{cupy.show_config()=}')"
+pip install cutensor-cu12 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
+pip install nvidia-cusparselt-cu12 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
+pip install cupy-cuda12x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda11x
+python -c "import cupy; cupy.show_config()"
 
 echo
 echo "******************"
 echo "Installing Torch's"
 echo "******************"
 # TODO: update pytorch wheels url from time to time for cuda upgrade
-pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu130
+pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
 pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
 pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
@@ -106,14 +106,14 @@ echo "********************"
 # TODO: langchain requires numpy<2
 pip install langchain # https://pypi.org/project/langchain/
 
-echo
-echo "******************"
-echo "Installing LLama's"
-echo "******************"
-# pip install llama-cpp-python --no-cache-dir --verbose --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
-# https://github.com/abetlen/llama-cpp-python#supported-backends
-# pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
-CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir
+#echo
+#echo "******************"
+#echo "Installing LLama's"
+#echo "******************"
+## pip install llama-cpp-python --no-cache-dir --verbose --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
+## https://github.com/abetlen/llama-cpp-python#supported-backends
+## pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
+#CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir
 
 # post install
 conda config --set default_activation_env "$1"
