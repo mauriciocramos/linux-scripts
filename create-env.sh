@@ -106,14 +106,14 @@ echo "********************"
 # TODO: langchain requires numpy<2
 pip install langchain # https://pypi.org/project/langchain/
 
-#echo
-#echo "******************"
-#echo "Installing LLama's"
-#echo "******************"
-## pip install llama-cpp-python --no-cache-dir --verbose --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
-## https://github.com/abetlen/llama-cpp-python#supported-backends
-## pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
-#CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir
+echo
+echo "******************"
+echo "Installing LLama's"
+echo "******************"
+# pip install llama-cpp-python --no-cache-dir --verbose --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
+# https://github.com/abetlen/llama-cpp-python#supported-backends
+# pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
+CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir
 
 # post install
 conda config --set default_activation_env "$1"
