@@ -93,8 +93,7 @@ echo "******************"
 echo "Installing Spacy's"
 echo "******************"
 ## TODO: By 3/2/26 spacy[cuda12x,transformers,lookups](3.8.11) requires numpy=1.26.4 (5/2/24) and break en_core_web_trf model installer
-## [cuda11x] for CUDA 11.2-11.X
-## [cuda12x] for CUDA 12.X:
+## Only [cuda11x] for CUDA 11.2-11.X and [cuda12x] for CUDA 12.X
 pip install 'spacy[cuda12x,transformers,lookups]'
 python -c "import spacy; print(f'{spacy.require_gpu()=}')"
 
