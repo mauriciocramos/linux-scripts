@@ -41,15 +41,16 @@ echo "***************************"
 conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13"
 conda activate "$1"
 pip install --upgrade pip setuptools wheel
-pip install -qqq "numpy<2" scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
+pip install "numpy<2" scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
 autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
-## TODO: Not using since their courses: pyspark pydub python-confluent-kafka networkx nxviz pydot graphviz
+## TODO: Not using since their courses: pyspark python-confluent-kafka networkx nxviz pydot graphviz
 
 echo
 echo "*************************"
 echo "Installing CPU ML & NLP's"
 echo "*************************"
 pip install scikit-learn nltk leia vosk wordcloud textblob langdetect
+pip install SpeechRecognition pydub textatistic textstat # Datacamp's NLP
 pip install gensim # Topic modelling, document indexing and similarity retrieval with large corpora
 # TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
 #pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
