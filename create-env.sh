@@ -41,54 +41,52 @@ echo "***************************"
 conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13"
 conda activate "$1"
 pip install --upgrade pip setuptools wheel
-pip install "numpy<2" scipy \
-jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black \
-#statsmodels pandas pandas-stubs openpyxl \
-#matplotlib seaborn selenium scrapy \
-#sqlalchemy pymongo dnspython pypdf
+pip install "numpy<2" scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
+autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
 ## TODO: Not using since their courses: pyspark pydub python-confluent-kafka networkx nxviz pydot graphviz
 
-#echo
-#echo "*************************"
-#echo "Installing CPU ML & NLP's"
-#echo "*************************"
-#pip install scikit-learn nltk leia vosk wordcloud textblob langdetect
-#pip install gensim # Topic modelling, document indexing and similarity retrieval with large corpora
-## TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
-##pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
-## TODO: DEPRECATED
-#pip install modAL-python # Modular Active Learning framework built on top of scikit-learn (3+ y.o.)
+echo
+echo "*************************"
+echo "Installing CPU ML & NLP's"
+echo "*************************"
+pip install scikit-learn nltk leia vosk wordcloud textblob langdetect
+pip install gensim # Topic modelling, document indexing and similarity retrieval with large corpora
+# TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
+#pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
+# TODO: modAL-python use case
+pip install modAL-python # Modular Active Learning framework built on top of scikit-learn (3+ y.o.)
 
-#echo
-#echo "*****************"
-#echo "Installing Cupy's"
-#echo "*****************"
-#pip install cutensor-cu12 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
-#pip install nvidia-cusparselt-cu12 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
-#pip install cupy-cuda12x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda11x
-#python -c "import cupy; cupy.show_config()"
+echo
+echo "*****************"
+echo "Installing Cupy's"
+echo "*****************"
+pip install cutensor-cu13 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
+pip install nvidia-cusparselt-cu13 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
+pip install cupy-cuda13x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda11x
+python -c "import cupy; print('{cupy.show_config()=}')"
 
-#echo
-#echo "******************"
-#echo "Installing Torch's"
-#echo "******************"
-## TODO: update pytorch wheels url from time to time for cuda upgrade
-#pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu128
-#pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
-#pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
+echo
+echo "******************"
+echo "Installing Torch's"
+echo "******************"
+# TODO: update pytorch wheels url from time to time for cuda upgrade
+pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu130
+pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
+pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
+python -c "import torch; print(f'{torch.cuda.is_available()=}')"
 
-#echo
-#echo "*************************"
-#echo "Installing Hugging Face's"
-#echo "*************************"
-#pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
-## TODO: trl 0.27.2 requires transformers>=4.56.2, but spacy requires transformers 4.49.0 which is incompatible.
-##pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
-#pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
-#pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
-#pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
-#pip install hf_xet # Xet Storage suggested by HF's Transformers
-#pip install rouge-score # required by HF's evaluate metric ROUGE
+echo
+echo "*************************"
+echo "Installing Hugging Face's"
+echo "*************************"
+pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
+# TODO: trl 0.27.2 requires transformers>=4.56.2, but spacy requires transformers 4.49.0 which is incompatible.
+#pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
+pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
+pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
+pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
+pip install hf_xet # Xet Storage suggested by HF's Transformers
+pip install rouge-score # required by HF's evaluate metric ROUGE
 
 echo
 echo "******************"
@@ -97,25 +95,26 @@ echo "******************"
 ## TODO: By 3/2/26 spacy[cuda12x,transformers,lookups](3.8.11) requires numpy=1.26.4 (5/2/24) and break en_core_web_trf model installer
 ## [cuda11x] for CUDA 11.2-11.X
 ## [cuda12x] for CUDA 12.X:
-pip install 'spacy[cuda11x,transformers,lookups]'
+pip install 'spacy[cuda12x,transformers,lookups]'
+python -c "import spacy; print(f'{spacy.require_gpu()=}')"
 
-#echo
-#echo "********************"
-#echo "Installing Langchain"
-#echo "********************"
-## LangChain provides a pre-built agent architecture and model integrations to help you get started quickly
-## and seamlessly incorporate LLMs into your agents and applications connecting OpenAI, Anthropic, Google, and more.
-## TODO: langchain requires numpy<2
-#pip install langchain # https://pypi.org/project/langchain/
+echo
+echo "********************"
+echo "Installing Langchain"
+echo "********************"
+# LangChain provides a pre-built agent architecture and model integrations to help you get started quickly
+# and seamlessly incorporate LLMs into your agents and applications connecting OpenAI, Anthropic, Google, and more.
+# TODO: langchain requires numpy<2
+pip install langchain # https://pypi.org/project/langchain/
 
-#echo
-#echo "******************"
-#echo "Installing LLama's"
-#echo "******************"
-## pip install llama-cpp-python --no-cache-dir --verbose --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
-## https://github.com/abetlen/llama-cpp-python#supported-backends
-## pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
-#CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python #--no-cache-dir
+echo
+echo "******************"
+echo "Installing LLama's"
+echo "******************"
+# pip install llama-cpp-python --no-cache-dir --verbose --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
+# https://github.com/abetlen/llama-cpp-python#supported-backends
+# pip install llama-stack # Composable building blocks to build Llama Apps: https://github.com/meta-llama/llama-stack
+CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --no-cache-dir
 
 # post install
 conda config --set default_activation_env "$1"
