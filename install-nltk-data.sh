@@ -20,5 +20,3 @@ conda activate "$1"
 # python -c 'import nltk; nltk.download(["punkt", "stopwords", "vader_lexicon", "averaged_perceptron_tagger", "maxent_ne_chunker", "words", "tagsets", "wordnet", "omw-1.4"], download_dir="/data/nltk_data")'
 # python -m nltk.downloader -d "$NLTK_DATA" punkt stopwords vader_lexicon averaged_perceptron_tagger maxent_ne_chunker words tagsets
 python -m nltk.downloader -d "$NLTK_DATA" all
-
-# TODO: LeIA para SE PT
