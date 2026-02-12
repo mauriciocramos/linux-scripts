@@ -55,7 +55,8 @@ pip install gensim # Topic modelling, document indexing and similarity retrieval
 # TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
 #pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
 # TODO: modAL-python use case
-pip install modAL-python # Modular Active Learning framework built on top of scikit-learn (3+ y.o.)
+pip install modAL-python # Modular Active Learning framework built on top of scikit-learn (3+
+# TODO: rasa_nlu if still relevant
 
 echo
 echo "*****************"
