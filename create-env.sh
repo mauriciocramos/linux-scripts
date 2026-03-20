@@ -83,7 +83,7 @@ echo "Installing Hugging Face's"
 echo "*************************"
 pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
 # TODO: trl 0.29.1 requires transformers>=4.56.2, but you have transformers 4.49.0 (because of spacy) which is incompatible.
-pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
+# pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
 pip install hf-transfer # Speed up file transfers with the Hub.
 pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
 pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
