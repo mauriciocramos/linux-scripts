@@ -72,7 +72,8 @@ echo "******************"
 echo "Installing Torch's"
 echo "******************"
 # TODO: update pytorch wheels url from time to time for cuda upgrade
-pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
+# TODO: https://github.com/pytorch/ao/issues/2919 (torchao)
+pip install "torch==2.9.1" torchvision torchaudio torchmetrics "torchao==0.15.0" --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
 pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
 pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
@@ -100,14 +101,14 @@ pip install rouge-score # required by HF's evaluate metric ROUGE
 #pip install 'spacy[cuda12x,transformers,lookups]'
 #python -c "import spacy; print(f'{spacy.require_gpu()=}')"
 
-echo
-echo "********************"
-echo "Installing Langchain"
-echo "********************"
-# LangChain provides a pre-built agent architecture and model integrations to help you get started quickly
-# and seamlessly incorporate LLMs into your agents and applications connecting OpenAI, Anthropic, Google, and more.
-# TODO: langchain requires numpy<2
-pip install langchain # https://pypi.org/project/langchain/
+#echo
+#echo "********************"
+#echo "Installing Langchain"
+#echo "********************"
+## LangChain provides a pre-built agent architecture and model integrations to help you get started quickly
+## and seamlessly incorporate LLMs into your agents and applications connecting OpenAI, Anthropic, Google, and more.
+## TODO: langchain requires numpy<2
+#pip install langchain # https://pypi.org/project/langchain/
 
 echo
 echo "******************"
