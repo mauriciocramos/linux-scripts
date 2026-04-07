@@ -75,6 +75,7 @@ echo "******************"
 # TODO: https://github.com/pytorch/ao/issues/2919 (torchao)
 pip install "torch==2.9.1" torchvision torchaudio torchmetrics "torchao==0.15.0" --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
 pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
+# torchtune requires legacy hf_transfer
 pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
 
