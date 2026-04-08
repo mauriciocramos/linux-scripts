@@ -55,7 +55,7 @@ pip install gensim # Topic modelling, document indexing and similarity retrieval
 # TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
 #pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
 # TODO: modAL-python use case
-pip install modAL-python # Modular Active Learning framework built on top of scikit-learn (3+
+pip install modAL-python # Modular Active Learning framework built on top of scikit-learn
 # TODO: rasa_nlu if still relevant
 
 echo
@@ -64,7 +64,7 @@ echo "Installing Cupy's"
 echo "*****************"
 pip install cutensor-cu12 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
 pip install nvidia-cusparselt-cu12 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
-pip install cupy-cuda12x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda11x
+pip install cupy-cuda12x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda12#x
 python -c "import cupy; cupy.show_config()"
 
 echo
@@ -74,9 +74,8 @@ echo "******************"
 # TODO: update pytorch wheels url from time to time for cuda upgrade
 # TODO: https://github.com/pytorch/ao/issues/2919 (torchao)
 pip install "torch==2.9.1" torchvision torchaudio torchmetrics "torchao==0.15.0" --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
-pip install torch-fidelity # Very old (Jun 15, 2021) High-fidelity performance metrics for generative models in PyTorch
-# torchtune requires legacy hf_transfer
-pip install torchtune # Bit old (Apr 7, 2025) A native-PyTorch library for LLM fine-tuning
+pip install torch-fidelity # Feb 17, 2026. High-fidelity performance metrics for generative models in PyTorch
+pip install torchtune # easily authoring, post-training, and experimenting with LLMs fine-tuning
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
 
 echo
@@ -86,7 +85,7 @@ echo "*************************"
 pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
 # TODO: trl 0.29.1 requires transformers>=4.56.2, but you have transformers 4.49.0 (because of spacy) which is incompatible.
 pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
-pip install hf-transfer # Speed up file transfers with the Hub.
+# pip install hf-transfer # Speed up file transfers with the Hub.(replaced by hf_xet)
 pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
 pip install bitsandbytes # accessible large language models via k-bit quantization for PyTorch
 pip install wandb # Use Weights & Biases to train and fine-tune models, and manage models from experimentation to production.
@@ -102,14 +101,14 @@ pip install rouge-score # required by HF's evaluate metric ROUGE
 #pip install 'spacy[cuda12x,transformers,lookups]'
 #python -c "import spacy; print(f'{spacy.require_gpu()=}')"
 
-#echo
-#echo "********************"
-#echo "Installing Langchain"
-#echo "********************"
-## LangChain provides a pre-built agent architecture and model integrations to help you get started quickly
-## and seamlessly incorporate LLMs into your agents and applications connecting OpenAI, Anthropic, Google, and more.
-## TODO: langchain requires numpy<2
-#pip install langchain # https://pypi.org/project/langchain/
+echo
+echo "********************"
+echo "Installing Langchain"
+echo "********************"
+# LangChain provides a pre-built agent architecture and model integrations to help you get started quickly
+# and seamlessly incorporate LLMs into your agents and applications connecting OpenAI, Anthropic, Google, and more.
+# TODO: langchain requires numpy<2
+pip install langchain # https://pypi.org/project/langchain/
 
 echo
 echo "******************"
