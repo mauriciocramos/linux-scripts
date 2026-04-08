@@ -41,7 +41,8 @@ echo "***************************"
 conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13"
 conda activate "$1"
 pip install --upgrade pip setuptools wheel
-pip install "numpy<2" scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
+# pip install "numpy<2"
+pip install numpy scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
 autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
 ## TODO: Not using since their courses: pyspark python-confluent-kafka networkx nxviz pydot graphviz
 
@@ -53,7 +54,7 @@ pip install scikit-learn nltk leia vosk wordcloud textblob langdetect
 pip install SpeechRecognition pydub textatistic textstat # Datacamp's NLP
 pip install gensim # Topic modelling, document indexing and similarity retrieval with large corpora
 # TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
-#pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
+pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
 # TODO: modAL-python use case
 pip install modAL-python # Modular Active Learning framework built on top of scikit-learn
 # TODO: rasa_nlu if still relevant
@@ -73,7 +74,8 @@ echo "Installing Torch's"
 echo "******************"
 # TODO: update pytorch wheels url from time to time for cuda upgrade
 # TODO: https://github.com/pytorch/ao/issues/2919 (torchao)
-pip install "torch==2.9.1" torchvision torchaudio torchmetrics "torchao==0.15.0" --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
+# pip install "torch==2.9.1" torchvision torchaudio torchmetrics "torchao==0.15.0" --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
+pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
 pip install torch-fidelity # Feb 17, 2026. High-fidelity performance metrics for generative models in PyTorch
 pip install torchtune # easily authoring, post-training, and experimenting with LLMs fine-tuning
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
