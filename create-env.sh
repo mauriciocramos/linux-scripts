@@ -37,11 +37,10 @@ echo "***************************"
 echo "Installing base environment"
 echo "***************************"
 # Base environment: python, jupyter, numpy, pandas, graphics, scikit, nltk and data objects
-# TODO: By 3/2/26 it seems spacy[cuda12x,transformers,lookups] requires python<3.13 and numpy<2 (2024's 1.26.4)
+# TODO: 13/4/26 spacy[cuda12x,transformers,lookups] requires python<3.13 and numpy<2 (2024's 1.26.4)
 conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13"
 conda activate "$1"
 pip install --upgrade pip setuptools wheel
-# pip install "numpy<2"
 pip install numpy scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
 autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
 ## TODO: Not using since their courses: pyspark python-confluent-kafka networkx nxviz pydot graphviz
@@ -85,7 +84,7 @@ echo "*************************"
 echo "Installing Hugging Face's"
 echo "*************************"
 pip install transformers sentencepiece sacremoses datasets accelerate evaluate absl-py gguf
-# TODO: trl 0.29.1 requires transformers>=4.56.2, but you have transformers 4.49.0 (because of spacy) which is incompatible.
+# TODO: spacy->trl 1.1.0 requires transformers>=4.56.2, but you have transformers 4.49.0 which is incompatible.
 pip install trl # HF's Transformer Reinforcement Learning: A comprehensive library to post-train foundation models
 # pip install hf-transfer # Speed up file transfers with the Hub.(replaced by hf_xet)
 pip install peft # State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods
@@ -98,8 +97,8 @@ pip install rouge-score # required by HF's evaluate metric ROUGE
 #echo "******************"
 #echo "Installing Spacy's"
 #echo "******************"
-### TODO: By 3/2/26 spacy[cuda12x,transformers,lookups](3.8.11) requires numpy=1.26.4 (5/2/24) and break en_core_web_trf model installer
-### Only [cuda11x] for CUDA 11.2-11.X and [cuda12x] for CUDA 12.X
+## TODO: By 3/2/26 spacy[cuda12x,transformers,lookups](3.8.11) requires numpy=1.26.4 (5/2/24) and break en_core_web_trf model installer
+## Only [cuda11x] for CUDA 11.2-11.X and [cuda12x] for CUDA 12.X
 #pip install 'spacy[cuda12x,transformers,lookups]'
 #python -c "import spacy; print(f'{spacy.require_gpu()=}')"
 
