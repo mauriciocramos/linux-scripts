@@ -38,8 +38,9 @@ echo "Installing base environment"
 echo "***************************"
 # Base environment: python, jupyter, numpy, pandas, graphics, scikit, nltk and data objects
 # TODO: 13/4/26 spacy[cuda12x,transformers,lookups] requires python<3.13 and numpy<2 (2024's 1.26.4)
-conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13"
+conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages "python<3.13" pip
 conda activate "$1"
+
 pip install --upgrade pip setuptools wheel
 pip install numpy scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
 autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
@@ -65,6 +66,10 @@ echo "*****************"
 pip install cutensor-cu12 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
 pip install nvidia-cusparselt-cu12 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
 pip install cupy-cuda12x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda12#x
+echo
+echo "************"
+echo "Testing Cupy"
+echo "*************"
 python -c "import cupy; cupy.show_config()"
 
 echo
@@ -77,6 +82,10 @@ echo "******************"
 pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
 pip install torch-fidelity # Feb 17, 2026. High-fidelity performance metrics for generative models in PyTorch
 pip install torchtune # easily authoring, post-training, and experimenting with LLMs fine-tuning
+echo
+echo "*************"
+echo "Testing Torch"
+echo "*************"
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
 
 echo
