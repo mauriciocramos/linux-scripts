@@ -70,7 +70,7 @@ echo
 echo "************"
 echo "Testing Cupy"
 echo "*************"
-python -c "import cupy; cupy.show_config()"
+python -c "import cupy.cuda.nccl; import cupy; cupy.show_config()"
 
 echo
 echo "******************"
