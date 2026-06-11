@@ -20,14 +20,15 @@ read -rsp $'Press enter to continue...\n'
 START_TIME=$(date +%s)
 date
 
-source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within a script
-conda deactivate
 
 echo
 echo "********************************"
 echo "Configuring conda-forge channels"
 echo "********************************"
-conda config --add channels conda-forge
+source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within a script
+conda deactivate
+conda config --prepend channels conda-forge
+conda config --append channels nodefaults
 conda config --add default_channels conda-forge
 conda config --remove channels defaults
 conda config --show-sources
@@ -36,7 +37,8 @@ echo
 echo "**************"
 echo "Updating conda"
 echo "**************"
-conda update -n base -y --override-channels -c conda-forge conda
+conda update conda -n base -y --override-channels -c conda-forge
+exit
 
 # remove previous environment
 conda info
