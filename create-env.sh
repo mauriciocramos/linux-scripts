@@ -21,12 +21,26 @@ START_TIME=$(date +%s)
 date
 
 source "$HOME"/miniconda3/etc/profile.d/conda.sh # required to use conda within a script
+conda deactivate
+
+echo
+echo "********************************"
+echo "Configuring conda-forge channels"
+echo "********************************"
+conda config --add channels conda-forge
+conda config --add default_channels conda-forge
+conda config --remove channels defaults
+conda config --show-sources
+
+echo
+echo "**************"
+echo "Updating conda"
+echo "**************"
 conda update -n base -y --override-channels -c conda-forge conda
 
 # remove previous environment
-conda deactivate
 conda info
-conda config --set default_activation_env base # otherwise conda remove fails
+conda config --set default_activation_env base # otherwise conda fails to remove previous environment
 conda env remove -q -n "$1" $2
 ENVDIR=$HOME/miniconda3/envs/
 rm "$ENVDIR$1" -rf
