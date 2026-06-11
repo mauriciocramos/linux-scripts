@@ -80,7 +80,8 @@ echo "Installing Cupy's"
 echo "*****************"
 pip install cutensor-cu12 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
 pip install nvidia-cusparselt-cu12 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
-pip install cupy-cuda12x # cuda11x, cuda12x, cuda13x # https://pypi.org/search/?q=cupy-cuda12#x
+pip install nvidia-nccl-cu12 # cu12, cu13 # https://pypi.org/project/nvidia-nccl-cu12/
+pip install cupy-cuda12x # cuda12x[ctk], cuda13x # https://pypi.org/search/?q=cupy-cuda12#x
 echo
 echo "************"
 echo "Testing Cupy"
@@ -102,6 +103,8 @@ echo "*************"
 echo "Testing Torch"
 echo "*************"
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
+# TODO: cuTENSOR Version             : None
+# TODO: cuSPARSELt Build Version     : None
 
 echo
 echo "*************************"
