@@ -38,7 +38,6 @@ echo "**************"
 echo "Updating conda"
 echo "**************"
 conda update conda -n base -y --override-channels -c conda-forge
-exit
 
 # remove previous environment
 conda info
