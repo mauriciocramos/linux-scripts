@@ -57,17 +57,17 @@ conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages
 conda activate "$1"
 
 pip install --upgrade pip setuptools wheel
-pip install numpy scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter \
-autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
+pip install numpy scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
 ## TODO: Not using since their courses: pyspark python-confluent-kafka networkx nxviz pydot graphviz
 
 echo
-echo "*************************"
-echo "Installing CPU ML & NLP's"
-echo "*************************"
+echo "***********************"
+echo "Installing CPU ML & NLP"
+echo "***********************"
 pip install scikit-learn nltk leia vosk wordcloud textblob langdetect
 pip install SpeechRecognition pydub textatistic textstat # Datacamp's NLP
-pip install gensim # Topic modelling, document indexing and similarity retrieval with large corpora
+# TODO: gensim 4.4.0 of 16/10/25 is not building wheels
+# pip install gensim # Topic modelling, document indexing and similarity retrieval with large corpora
 # TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
 pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
 # TODO: modAL-python use case
@@ -128,6 +128,7 @@ pip install rouge-score # required by HF's evaluate metric ROUGE
 ## Only [cuda11x] for CUDA 11.2-11.X and [cuda12x] for CUDA 12.X
 #pip install 'spacy[cuda12x,transformers,lookups]'
 #python -c "import spacy; print(f'{spacy.require_gpu()=}')"
+#exit
 
 echo
 echo "********************"
