@@ -2,9 +2,9 @@
 clear
 
 echo '****************************************************'
-echo 'Conda Data Science environment creation'
+echo 'Data Science environment creation'
 echo 'Author: Mauricio Ramos (mauriciocramos at gmail.com)'
-echo 'Date created: 17/8/2020 last changed: 3/2/2026'
+echo 'Date created: 17/8/2020 last changed: 17/11/2026'
 echo 'Usage: create-env.sh dev [-y]'
 echo '****************************************************'
 
@@ -19,7 +19,6 @@ echo
 read -rsp $'Press enter to continue...\n'
 START_TIME=$(date +%s)
 date
-
 
 echo
 echo "********************************"
@@ -57,45 +56,43 @@ conda create -n "$1" -c conda-forge --override-channels $2 --no-default-packages
 conda activate "$1"
 
 pip install --upgrade pip setuptools wheel
-pip install numpy scipy jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black statsmodels pandas pandas-stubs openpyxl matplotlib seaborn selenium scrapy sqlalchemy pymongo dnspython pypdf
-## TODO: Not using since their courses: pyspark python-confluent-kafka networkx nxviz pydot graphviz
+pip install numpy scipy statsmodels
+pip install jupyterlab jupyterlab_widgets ipywidgets nodejs jupyterlab_execute_time jupyterlab-git jupyterlab_code_formatter autopep8 isort black
+pip install matplotlib seaborn
+pip install pandas openpyxl scrapy selenium sqlalchemy pymongo dnspython pypdf
+# TODO: Not using since their courses: pyspark python-confluent-kafka networkx nxviz pydot graphviz
 
 echo
 echo "***********************"
 echo "Installing CPU ML & NLP"
 echo "***********************"
-pip install scikit-learn nltk leia vosk wordcloud textblob langdetect
-pip install SpeechRecognition pydub textatistic textstat # Datacamp's NLP
-# TODO: gensim 4.4.0 of 16/10/25 is not building wheels
+pip install scikit-learn nltk # leia textblob langdetect wordcloud
+# pip install SpeechRecognition pydub textatistic textstat # Datacamp's
 # pip install gensim # Topic modelling, document indexing and similarity retrieval with large corpora
-# TODO: shap requires numpy>=2 but spacy requires 1.26.4 (<2)
-pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
-# TODO: modAL-python use case
-pip install modAL-python # Modular Active Learning framework built on top of scikit-learn
-# TODO: rasa_nlu if still relevant
+# pip install shap # SHapley Additive exPlanations: game theoretic approach to explain the output of any machine learning model
+# pip install modAL-python # Modular Active Learning framework built on top of scikit-learn
 
-echo
-echo "*****************"
-echo "Installing Cupy's"
-echo "*****************"
-pip install cutensor-cu12 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
-pip install nvidia-cusparselt-cu12 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
-pip install nvidia-nccl-cu12 # cu12, cu13 # https://pypi.org/project/nvidia-nccl-cu12/
-pip install cupy-cuda12x # cuda12x[ctk], cuda13x # https://pypi.org/search/?q=cupy-cuda12#x
-echo
-echo "************"
-echo "Testing Cupy"
-echo "*************"
-python -c "import cupy.cuda.nccl; import cupy; cupy.show_config()"
+#echo
+#echo "*****************"
+#echo "Installing Cupy's"
+#echo "*****************"
+#pip install cutensor-cu12 # cu11, cu12, cu13 # # https://pypi.org/search/?q=cutensor
+#pip install nvidia-cusparselt-cu12 # cu12, cu13 # https://pypi.org/search/?q=cusparselt
+#pip install nvidia-nccl-cu12 # cu12, cu13 # https://pypi.org/project/nvidia-nccl-cu12/
+#pip install cupy-cuda12x # cuda12x[ctk], cuda13x # https://pypi.org/search/?q=cupy-cuda12#x
+#echo
+#echo "************"
+#echo "Testing Cupy"
+#echo "*************"
+#python -c "import cupy.cuda.nccl; import cupy; cupy.show_config()"
 
 echo
 echo "******************"
 echo "Installing Torch's"
 echo "******************"
 # TODO: update pytorch wheels url from time to time for cuda upgrade
-# TODO: https://github.com/pytorch/ao/issues/2919 (torchao)
-# pip install "torch==2.9.1" torchvision torchaudio torchmetrics "torchao==0.15.0" --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
-pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu128 # cuda126|cuda128|cuda130
+#pip install torch torchvision torchaudio torchmetrics torchao --index-url https://download.pytorch.org/whl/cu128
+pip install torch torchvision torchaudio torchmetrics torchao
 pip install torch-fidelity # Feb 17, 2026. High-fidelity performance metrics for generative models in PyTorch
 pip install torchtune # easily authoring, post-training, and experimenting with LLMs fine-tuning
 echo
@@ -103,8 +100,6 @@ echo "*************"
 echo "Testing Torch"
 echo "*************"
 python -c "import torch; print(f'{torch.cuda.is_available()=}')"
-# TODO: cuTENSOR Version             : None
-# TODO: cuSPARSELt Build Version     : None
 
 echo
 echo "*************************"
@@ -121,14 +116,15 @@ pip install hf_xet # Xet Storage suggested by HF's Transformers
 pip install rouge-score # required by HF's evaluate metric ROUGE
 
 #echo
-#echo "******************"
-#echo "Installing Spacy's"
-#echo "******************"
-## TODO: By 3/2/26 spacy[cuda12x,transformers,lookups](3.8.11) requires numpy=1.26.4 (5/2/24) and break en_core_web_trf model installer
-## Only [cuda11x] for CUDA 11.2-11.X and [cuda12x] for CUDA 12.X
+#echo "****************"
+#echo "Installing spacy"
+#echo "****************"
 #pip install 'spacy[cuda12x,transformers,lookups]'
+#echo
+#echo "*************"
+#echo "Testing spacy"
+#echo "*************"
 #python -c "import spacy; print(f'{spacy.require_gpu()=}')"
-#exit
 
 echo
 echo "********************"
@@ -136,7 +132,6 @@ echo "Installing Langchain"
 echo "********************"
 # LangChain provides a pre-built agent architecture and model integrations to help you get started quickly
 # and seamlessly incorporate LLMs into your agents and applications connecting OpenAI, Anthropic, Google, and more.
-# TODO: langchain requires numpy<2
 pip install langchain # https://pypi.org/project/langchain/
 
 echo
